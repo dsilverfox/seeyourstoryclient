@@ -4,15 +4,15 @@ interface AdminVars {
     users: object
 }
 
-
 class AdminLogic extends React.Component <{}, AdminVars> {
-    constructor(props){
+    constructor(props: AdminVars){
         super(props)
         this.state = {
+            users: {}
         }
     }
     
-    viewUsers = async (event: React.SyntheticEvent) => {
+    viewUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         await fetch("http://localhost:3000/auth/userinfo", {
             method: "GET",
@@ -29,8 +29,10 @@ class AdminLogic extends React.Component <{}, AdminVars> {
     render() {
         return(
             <div className="Buttons">
-                <button onClick={(event) => {this.viewUsers}}>View Users</button>
+                <button onClick={(event) => {this.viewUsers(event)}}>View Users</button>
             </div>
         )
     }
 }
+
+export default AdminLogic;

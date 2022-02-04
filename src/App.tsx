@@ -24,7 +24,7 @@ class App extends React.Component<{}, tokenState> {
     }
   }
 
-   updateToken = (newToken:string) => {
+   updateToken = (newToken:any) => {
     const sessionToken = this.state.sessionToken;
     localStorage.setItem('token', newToken);
     this.setState({sessionToken: newToken});
