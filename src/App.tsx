@@ -4,49 +4,54 @@ import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
 
-interface tokenState{
-  sessionToken: string | null,
-  newToken: string
+export interface tokenState {
+  sessionToken: string | null
+  token: string | null
+  updateToken: any
 }
 
+
 class App extends React.Component<{}, tokenState> {
-  constructor(props: tokenState){
+  constructor(props: tokenState) {
     super(props)
     this.state = {
-      sessionToken: '',
-      newToken: ''
+      sessionToken: " ",
+      token: " ",
+      updateToken: " ",
     }
   }
 
   componentDidMount() {
     if (localStorage.getItem('token')) {
-      this.setState({sessionToken: localStorage.getItem('token')});
+      this.setState({ sessionToken: localStorage.getItem('token') });
     }
   }
 
-   updateToken = (newToken:any) => {
+  updateToken = (newToken: string) => {
     const sessionToken = this.state.sessionToken;
     localStorage.setItem('token', newToken);
-    this.setState({sessionToken: newToken});
+    this.setState({ sessionToken: newToken });
     console.log(sessionToken);
+    return newToken;
   }
 
   clearToken = () => {
     localStorage.clear();
-    this.setState({sessionToken: " "})
+    this.setState({ sessionToken: " " })
   }
 
 
-   protectedViews = () => {
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected token={this.state.sessionToken} updateToken={this.updateToken} /> : <Unprotected />)
+  protectedViews = () => {
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected token={this.state.sessionToken} updateToken={this.state.updateToken} /> : <Unprotected />)
   }
-  render(){
-  return (
-    <div className="App">
-      <NavBar clickLogout={this.clearToken}/>
-      {this.protectedViews()}
-    </div>
-  )
+
+  render() {
+    return (
+      <div className="App">
+        <NavBar clickLogout={this.clearToken} />
+        {this.protectedViews()}
+      </div>
+    )
   }
 }
 
