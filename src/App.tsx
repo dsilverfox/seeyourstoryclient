@@ -3,6 +3,7 @@ import './App.css';
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 export interface tokenState {
   sessionToken: string | null
@@ -48,7 +49,9 @@ class App extends React.Component<{}, tokenState> {
   render() {
     return (
       <div className="App">
-        <NavBar clickLogout={this.clearToken} />
+        <Router>
+          <NavBar clickLogout={this.clearToken} />
+        </Router>
         {this.protectedViews()}
       </div>
     )

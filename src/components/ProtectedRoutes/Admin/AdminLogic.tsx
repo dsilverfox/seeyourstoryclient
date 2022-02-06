@@ -48,8 +48,11 @@ class AdminLogic extends React.Component <tokenState, AdminVars> {
 
     render() {
         return(
-            <div className="Buttons">
+            <div className="Admin">
+                <h1>Greeting Admin!</h1>
+                <p>You can perform three functions from this page. You can delete your account. You can view all users on the site and using their ID you can delete any user.</p>
                 <button onClick={(event) => {this.viewUsers(event)}}>View Users</button>
+                <button onClick={(event) => {this.deleteUsers(event)}}>Delete User</button>
             </div>
         )
     }

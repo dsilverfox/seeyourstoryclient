@@ -1,10 +1,12 @@
 import React from 'react';
+import ExampleDisplay from './Example/ExampleDisplay';
+import AuthDisplay from "./Auth/AuthDisplay"
 
 const Unprotected = () => {
     return (
         <div>
-            I AM THE Unprotected Routes!
-            I will hold the authentication card and our use example/tutorial
+          <AuthDisplay/>
+          <ExampleDisplay/>
         </div>
     )
 }
