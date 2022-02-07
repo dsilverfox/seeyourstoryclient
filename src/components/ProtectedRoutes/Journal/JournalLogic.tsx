@@ -1,9 +1,9 @@
 import React from 'react';
 import { tokenState } from '../../../App';
-const Radium = require('radium');
 
 interface journalProps extends tokenState {
-    journal: {title: string, content: string}
+    title: { value: string; }
+    content: { value: string; }
 }
 
 class JournalLogic extends React.Component<tokenState, journalProps> {
@@ -11,7 +11,8 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
         super(props)
 
         this.state = {
-            journal: {title: " ", content: " "},
+            title: { value: '' },
+            content: { value: '' },
             sessionToken: " ",
             token: " ",
             updateToken: " ",
@@ -24,8 +25,8 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
             method: "POST",
             body: JSON.stringify({
                 journal: {
-                    title: this.state.journal.title,
-                    content: this.state.journal.content,
+                    title: this.state.title,
+                    content: this.state.content,
                 }
             }),
             headers: new Headers({
@@ -35,7 +36,8 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
         })
             .then((res) => res.json())
             .then((journalData) => {
-                this.setState({ journal: (title, content) })
+                this.setState({ title: this.state.title})
+                this.setState({ content: this.state.content })
             })
     }
 
@@ -46,8 +48,8 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
             method: "PUT",
             body: JSON.stringify({
                 journal: {
-                    title: this.state.journal.title,
-                    content: this.state.journal.content,
+                    title: this.state.title,
+                    content: this.state.content,
                 }
             }),
             headers: new Headers({
@@ -57,7 +59,8 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
         })
             .then((res) => res.json())
             .then((journalData) => {
-                this.setState({ journal: (title, content)})
+                this.setState({ title: this.state.title })
+                this.setState({ content: this.state.content })
             })
     }
 
@@ -86,14 +89,34 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
 
             .then((res) => res.json())
             .then((journalData) => {
-                this.setState({ journal: journalData });
+                this.setState({ title: this.state.title })
+                this.setState({ content: this.state.content })
             });
     }
+    handleTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ title: { value: event.target.value } })
+    }
 
+    handleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ content: { value: event.target.value } })
+    }
     render() {
         return (
             <div>
-                <button onClick={(event) => { this.createjournal(event) }}>Create a New journal</button>
+                <form>
+                    <label>Title:</label>
+                    <input type="text" placeholder="Enter your Story Title"
+                        value={this.state.title.value}
+                        onChange={this.handleTitle}></input>
+
+
+                    <label>Content:</label>
+                    <input type="password"
+                        value={this.state.content.value}
+                        onChange={this.handleContent}></input>
+                    <button onClick={(event) => { this.createjournal(event) }}>Create a New journal</button>
+                </form>
+
                 <button onClick={(event) => { this.viewonejournal(event) }}>View Selected journal</button>
                 <button onClick={(event) => { this.editjournal(event) }}>Edit journal</button>
                 <button onClick={(event) => { this.deletejournal(event) }}>Delete journal</button>
@@ -102,4 +125,4 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
     }
 }
 
-export default Radium(JournalLogic);
+export default JournalLogic;

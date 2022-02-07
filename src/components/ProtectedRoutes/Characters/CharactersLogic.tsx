@@ -1,12 +1,11 @@
 import React from 'react';
 import { tokenState } from '../../../App';
-const Radium = require('radium');
 
 interface characterProps extends tokenState {
-    firstname: string,
-    lastname: string,
-    gender: string,
-    age: number,
+    firstname: { value: string },
+    lastname: { value: string },
+    gender: { value: string },
+    age: { value: string },
     // dob: Date,
     characters: {}
 }
@@ -16,10 +15,10 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
         super(props)
 
         this.state = {
-            firstname: " ",
-            lastname: " ",
-            gender: " ",
-            age: 0,
+            firstname: { value: '' },
+            lastname: { value: '' },
+            gender: { value: '' },
+            age: { value: '' },
             // dob: 01/01/1901,
             characters: {},
             sessionToken: " ",
@@ -48,7 +47,7 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
         })
             .then((res) => res.json())
             .then((CharacterData) => {
-                this.setState({firstname: this.state.firstname})
+                this.setState({ firstname: this.state.firstname })
                 this.setState({ lastname: this.state.lastname })
                 this.setState({ gender: this.state.gender })
                 this.setState({ age: this.state.age })
@@ -131,13 +130,62 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
                 this.setState({ characters: CharacterData });
             });
     }
+    handleFirstname = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ firstname: { value: event.target.value } })
+    }
 
+    handleLastname = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ lastname: { value: event.target.value } })
+    }
+
+    handleGender = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ gender: { value: event.target.value } })
+    }
+
+    handleAge = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ age: { value: event.target.value } })
+    }
+
+    // handleDOB = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     this.setState({ dob: { value: event.target.value } })
+    // }
     render() {
         return (
             <div>
-                <button onClick={(event) => { this.createCharacter(event) }}>Create a New Character</button>
+                <form>
+                    <label>First Name:</label>
+                    <input type="text" placeholder="Enter your Story Title"
+                        value={this.state.firstname.value}
+                        onChange={this.handleFirstname}></input>
+
+
+                    <label>Last Name:</label>
+                    <input type="text"
+                        value={this.state.lastname.value}
+                        onChange={this.handleLastname}></input>
+
+                    <label>Gender:</label>
+                    <input type="text"
+                        value={this.state.gender.value}
+                        onChange={this.handleGender}></input>
+
+                    <label>Age:</label>
+                    <input type="text"
+                        value={this.state.age.value}
+                        onChange={this.handleAge}></input>
+
+                    {/* <label>Date of Birth:</label>
+                    <input type="text"
+                        value={this.state.age.value}
+                        onChange={this.handleDOB}></input> */}
+
+                    <button onClick={(event) => { this.createCharacter(event) }}>Create a New Character</button>
+
+                    <button onClick={(event) => { this.viewallCharacters(event) }}>View All Characters</button>
+
+                </form>
+
                 <button onClick={(event) => { this.viewoneCharacter(event) }}>View Selected Character</button>
-                <button onClick={(event) => { this.viewallCharacters(event) }}>View All Characters</button>
                 <button onClick={(event) => { this.editCharacter(event) }}>Edit Character</button>
                 <button onClick={(event) => { this.deleteCharacter(event) }}>Delete Character</button>
             </div>
@@ -145,4 +193,4 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
     }
 }
 
-export default Radium(CharacterLogic);
+export default CharacterLogic;

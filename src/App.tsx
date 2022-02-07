@@ -9,6 +9,7 @@ export interface tokenState {
   sessionToken: string | null
   token: string | null
   updateToken: any
+  //correct updateToken to a real type just trying to get anything to display at all.
 }
 
 
@@ -43,7 +44,7 @@ class App extends React.Component<{}, tokenState> {
 
 
   protectedViews = () => {
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected token={this.state.sessionToken} updateToken={this.state.updateToken} /> : <Unprotected />)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected token={this.state.sessionToken} updateToken={this.state.updateToken} /> : <Unprotected sessionToken={this.state.sessionToken} token={this.state.token} updateToken={this.state.updateToken} />)
   }
 
   render() {
@@ -52,6 +53,7 @@ class App extends React.Component<{}, tokenState> {
         <Router>
           <NavBar clickLogout={this.clearToken} />
         </Router>
+  
         {this.protectedViews()}
       </div>
     )

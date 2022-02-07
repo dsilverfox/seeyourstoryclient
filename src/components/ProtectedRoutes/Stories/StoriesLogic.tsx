@@ -3,9 +3,9 @@ import { tokenState } from '../../../App';
 const Radium = require('radium');
 
 interface storyProps extends tokenState {
-    title: string,
-    content: string
-    stories: {}
+    title: {value: string;}
+    content: {value: string;}
+    stories: {}[]
 }
 
 class StoriesLogic extends React.Component <tokenState, storyProps> {
@@ -13,12 +13,12 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
         super(props)
 
         this.state = {
-            title: '',
-            content: '',
+            title: {value:''},
+            content: {value: ''},
             sessionToken: " ",
             token: " ",
             updateToken: " ",
-            stories: {}
+            stories: [{}]
         }
     }
 
@@ -113,11 +113,32 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
                 this.setState({ stories: storyData });
             });
     }
+    handleTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ title: { value: event.target.value } })
+    }
+
+    handleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ content: { value: event.target.value } })
+    }
 
     render() {
         return(
             <div>
-                <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
+
+                <form>
+                    <label>Title:</label>
+                    <input type="text" placeholder="Enter your Story Title"
+                        value={this.state.title.value}
+                        onChange={this.handleTitle}></input>
+
+
+                    <label>Content:</label>
+                    <input type="password"
+                        value={this.state.content.value}
+                        onChange={this.handleContent}></input>
+                    <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
+                </form>
+
                 <button onClick={(event) => { this.viewoneStory(event) }}>View Selected Story</button>
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
                 <button onClick={(event) => { this.editStory(event) }}>Edit Story</button>

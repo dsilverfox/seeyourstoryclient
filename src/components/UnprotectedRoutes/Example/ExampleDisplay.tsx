@@ -7,18 +7,18 @@ const ExampleDisplay = () => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="holder.js/800x400?text=First slide&bg=373940"
+                    src="https://dsilverfox.github.io/Assets/SilverfoxWQuill%20(2).jpg"
                     alt="First slide"
                 />
                 <Carousel.Caption>
                     <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <p>My company logo.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="holder.js/800x400?text=Second slide&bg=282c34"
+                    src="https://dsilverfox.github.io/Assets/Build%20in%20Progress.PNG"
                     alt="Second slide"
                 />
 
@@ -30,7 +30,7 @@ const ExampleDisplay = () => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="holder.js/800x400?text=Third slide&bg=20232a"
+                    src="https://dsilverfox.github.io/Assets/Build%20in%20Progress.PNG"
                     alt="Third slide"
                 />
 

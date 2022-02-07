@@ -1,17 +1,23 @@
 import React from 'react';
+// import { Navbar, NavbarBrand } from 'reactstrap';
+
 
 interface navProps {
       clickLogout:  React.MouseEventHandler<HTMLButtonElement>
 }
-const NavBar = (props: navProps) => {
+const AppBar = (props: navProps) => {
 
     return(
-        <div>
+        <div className="Navlist">
+            {/* <Navbar>
+                <NavbarBrand href="/"> */}
             <h1>See Your Story</h1>
+                {/* </NavbarBrand> */}
             <button onClick={props.clickLogout}> Logout </button>
+             {/* </Navbar> */}
         </div>
     )
 }
 
 
-export default NavBar;
+export default AppBar;
