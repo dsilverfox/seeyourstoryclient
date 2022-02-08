@@ -3,7 +3,7 @@ import './App.css';
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
-import { BrowserRouter as Router } from 'react-router-dom';
+
 
 export interface tokenState {
   sessionToken: string | null
@@ -22,13 +22,15 @@ class App extends React.Component<{}, tokenState> {
       updateToken: " ",
     }
   }
-
+//If the user already has a token, get the token
   componentDidMount() {
     if (localStorage.getItem('token')) {
       this.setState({ sessionToken: localStorage.getItem('token') });
     }
   }
 
+//If the user doesn't yet have a token, assign a token based on sign in
+// RETURN NEWTOKEN ENTERED TO FIX ERROR BEING CALLED ON UPDATE TOKEN FUNCTION
   updateToken = (newToken: string) => {
     const sessionToken = this.state.sessionToken;
     localStorage.setItem('token', newToken);
@@ -37,12 +39,13 @@ class App extends React.Component<{}, tokenState> {
     return newToken;
   }
 
+  //When the user logs out clear the token
   clearToken = () => {
     localStorage.clear();
     this.setState({ sessionToken: " " })
   }
 
-
+//If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
     return (this.state.sessionToken === localStorage.getItem('token') ? <Protected token={this.state.sessionToken} updateToken={this.state.updateToken} /> : <Unprotected sessionToken={this.state.sessionToken} token={this.state.token} updateToken={this.state.updateToken} />)
   }
@@ -50,11 +53,8 @@ class App extends React.Component<{}, tokenState> {
   render() {
     return (
       <div className="App">
-        <Router>
           <NavBar clickLogout={this.clearToken} />
-        </Router>
-  
-        {this.protectedViews()}
+          {this.protectedViews()}
       </div>
     )
   }

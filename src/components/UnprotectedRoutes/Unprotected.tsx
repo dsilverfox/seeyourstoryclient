@@ -5,8 +5,8 @@ import UserLogic from '../ProtectedRoutes/User/UserLogic';
 
 interface loginProps {
   sessionToken: string|null,
-  token: string|null,
-  updateToken: any
+  token: string | null,
+  updateToken: string
 
 }
 

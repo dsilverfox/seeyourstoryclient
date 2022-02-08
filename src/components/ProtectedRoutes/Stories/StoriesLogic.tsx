@@ -24,7 +24,7 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
 
     createStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/story/create", {
+        fetch("https://seeyourstoryserver.herokuapp.com/story/create", {
             method: "POST",
             body: JSON.stringify({
                 story: {
@@ -47,7 +47,7 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
     //EDIT STORY
     editStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/story/update/:storyId", {
+        fetch("https://seeyourstoryserver.herokuapp.com/story/update/:storyId", {
             method: "PUT",
             body: JSON.stringify({
                 story: {
@@ -71,7 +71,7 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
 
     deleteStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("http://localhost:3000/story/delete/:storyId", {
+        await fetch("https://seeyourstoryserver.herokuapp.com/story/delete/:storyId", {
             method: "DELETE",
             headers: new Headers({
                 "Content-Type": "application/json",
@@ -83,7 +83,7 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
     //VIEW ALL STORIES
     viewallStories = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/story/view", {
+        fetch("https://seeyourstoryserver.herokuapp.com/story/view", {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
     //VIEW ALL STORIES
     viewoneStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/story/view/:storyId", {
+        fetch("https://seeyourstoryserver.herokuapp.com/story/view/:storyId", {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

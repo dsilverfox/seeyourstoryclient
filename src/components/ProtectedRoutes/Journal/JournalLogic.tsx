@@ -21,7 +21,7 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
 
     createjournal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/journal/create", {
+        fetch("https://seeyourstoryserver.herokuapp.com/journal/create", {
             method: "POST",
             body: JSON.stringify({
                 journal: {
@@ -44,7 +44,7 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
     //EDIT journal
     editjournal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/journal/update/:journalId", {
+        fetch("https://seeyourstoryserver.herokuapp.com/journal/update/:journalId", {
             method: "PUT",
             body: JSON.stringify({
                 journal: {
@@ -68,7 +68,7 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
 
     deletejournal = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("http://localhost:3000/journal/delete/:journalId", {
+        await fetch("https://seeyourstoryserver.herokuapp.com/journal/delete/:journalId", {
             method: "DELETE",
             headers: new Headers({
                 "Content-Type": "application/json",
@@ -79,7 +79,7 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
     //VIEW ONE Journal
     viewonejournal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/journal/view/:journalId", {
+        fetch("https://seeyourstoryserver.herokuapp.com/journal/view/:journalId", {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

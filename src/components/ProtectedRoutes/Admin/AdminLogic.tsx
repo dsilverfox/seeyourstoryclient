@@ -22,7 +22,7 @@ class AdminLogic extends React.Component <tokenState, AdminVars> {
 //VIEW ALL USERS
     viewUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("http://localhost:3000/auth/userinfo", {
+        await fetch("https://seeyourstoryserver.herokuapp.com/auth/userinfo", {
             method: "GET",
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ class AdminLogic extends React.Component <tokenState, AdminVars> {
 //DELETE A USER
     deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("http://localhost:3000/auth/delete/:id", {
+        await fetch("https://seeyourstoryserver.herokuapp.com/auth/delete/:id", {
             method: "DELETE",
             headers: new Headers({
                 "Content-Type": "application/json",

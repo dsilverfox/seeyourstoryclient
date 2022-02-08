@@ -1,24 +1,22 @@
 import React from 'react';
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap'
-import { JsxElement } from 'typescript';
+import { Card, Card.Img, Card.Body, Card.Title, CardSubtitle, Card.Text, Button} from 'react-bootstrap'
 
-interface displayProps {
-Card: JsxElement,
 
-}
 
-const UsersDisplay = (props: displayProps) => {
+const UsersDisplay = () => {
     return (
         <div>
-            <Card className="profileCard" >
-                {/* <CardImg className="Image" top width="100%" src={props.plant.imageurl} alt="Card image cap" /> */}
-                <CardBody>
-                    <CardTitle>Username: {props.user.username}</CardTitle>
-                    <CardSubtitle>User ID: {props.plant.botname}</CardSubtitle>
-                    {/* <CardText>Placeholder for when stretch goals allow more.</CardText> */}
-                    {/* Not sure how to get the user ID */}
-                 </CardBody>
-            </Card> 
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Body>
+                    <Card.Title>Card Title</Card.Title>
+                    <Card.Text>
+                        Some quick example text to build on the card title and make up the bulk of
+                        the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
         </div>
     )
 }

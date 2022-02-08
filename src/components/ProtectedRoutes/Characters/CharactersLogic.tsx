@@ -29,7 +29,7 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
 
     createCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/Character/create", {
+        fetch("https://seeyourstoryserver.herokuapp.com/Character/create", {
             method: "POST",
             body: JSON.stringify({
                 Character: {
@@ -58,7 +58,7 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
     //EDIT Character
     editCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/Character/update/:CharacterId", {
+        fetch("https://seeyourstoryserver.herokuapp.com/Character/update/:CharacterId", {
             method: "PUT",
             body: JSON.stringify({
                 Character: {
@@ -88,7 +88,7 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
 
     deleteCharacter = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("http://localhost:3000/Character/delete/:CharacterId", {
+        await fetch("https://seeyourstoryserver.herokuapp.com/Character/delete/:CharacterId", {
             method: "DELETE",
             headers: new Headers({
                 "Content-Type": "application/json",
@@ -100,7 +100,7 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
     //VIEW ALL Characters
     viewallCharacters = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/Character/view", {
+        fetch("https://seeyourstoryserver.herokuapp.com/Character/view", {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ class CharacterLogic extends React.Component<tokenState, characterProps> {
     //VIEW ALL Characters
     viewoneCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("http://localhost:3000/Character/view/:characterId", {
+        fetch("https://seeyourstoryserver.herokuapp.com/Character/view/:characterId", {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

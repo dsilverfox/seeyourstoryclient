@@ -1,4 +1,34 @@
 .App {
   text-align: center;
+  background-color: black;
+  color: silver;
+  height: 120vh;
+  overflow-y: hidden;
+}
+.AppTitle{
+  color: white;
+}
+.Logo {
+  margin-left:-350px;
+  padding: 5px;
 }
 
+.caption {
+  color: black;
+}
+
+.carousel {
+  width: 60rem;
+  height: 35rem;
+  margin-left: 7rem;
+}
+
+.UserInput{
+  margin: 1rem;
+}
+.UserInput input{ 
+  margin: 1rem;
+}
+.UserInput button {
+  margin: 1rem;
+}
