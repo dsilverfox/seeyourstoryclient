@@ -8,6 +8,9 @@ interface protectedProps {
 
 const Protected = (props:protectedProps) => {
 
+    // adminViews = () => {
+        
+    //     return (this.state.sessionToken === localStorage.getItem('token') ? <Protected sessionToken={this.state.sessionToken} /> : <Unprotected updateToken={this.updateToken} />)
     return (
         <div>
             <StoriesLogic sessionToken={props.sessionToken} />

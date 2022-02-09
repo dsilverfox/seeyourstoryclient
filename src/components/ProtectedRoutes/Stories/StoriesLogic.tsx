@@ -30,7 +30,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
         fetch("https://seeyourstoryserver.herokuapp.com/story/create", {
             method: "POST",
             body: JSON.stringify({
-                story: {
+                stories: {
                     title: this.state.title.value,
                     content: this.state.content.value,
                 }
@@ -45,7 +45,10 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
         .then((storyData) => {
             console.log(storyData)
         })
-    }
+            .catch(error => {
+                console.log(error)
+            });
+    } 
 
     //EDIT STORY
     editStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -53,7 +56,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
         fetch("https://seeyourstoryserver.herokuapp.com/story/update/:storyId", {
             method: "PUT",
             body: JSON.stringify({
-                story: {
+                stories: {
                     title: this.state.title.value,
                     content: this.state.content.value,
                 }
@@ -96,11 +99,11 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
                 'Authorization': `Bearer ${this.props.sessionToken}`
             }),
         })
-
             .then((res) => res.json())
             .then((storyData) => {
                this.setState({stories: storyData});
             });
+
     }
 
     //VIEW ALL STORIES
@@ -147,10 +150,10 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
                     <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
                 </form>
 
-                <button onClick={(event) => { this.viewoneStory(event) }}>View Selected Story</button>
+                {/* <button onClick={(event) => { this.viewoneStory(event) }}>View Selected Story</button>
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
                 <button onClick={(event) => { this.editStory(event) }}>Edit Story</button>
-                <button onClick={(event) => { this.deleteStory(event) }}>Delete Story</button>
+                <button onClick={(event) => { this.deleteStory(event) }}>Delete Story</button> */}
             </div>
         )
     }

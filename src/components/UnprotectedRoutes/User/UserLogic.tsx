@@ -9,6 +9,7 @@ interface userProps {
 export interface UserVars {
     username: {value: string},
     password: {value: string},
+    hasAdmin: boolean
     // userId: string,
 }
 //REGEX Variables
@@ -24,6 +25,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
             // updateToken: " ",
             username: { value: '' },
             password: { value: '' },
+            hasAdmin: false
             // userId: ''
         }
         // this.analyze = this.analyze.bind(this);
@@ -82,10 +84,10 @@ class UserLogic extends React.Component<userProps, UserVars> {
              }),
         }).then((response) => response.json())
             .then((data) => {
-                console.log("DATA FOR SETSTATE TOKEN", data)
-                console.log("Data for UserId", data.user.id)
-                console.log("Data for Username", data.user)
-                console.log("Data for hasAdmin?", data.user.hasAdmin)
+                // console.log("DATA FOR SETSTATE TOKEN", data)
+                // console.log("Data for UserId", data.user.id)
+                // console.log("Data for Username", data.user)
+                // console.log("Data for hasAdmin?", data.user.hasAdmin)
                 this.props.updateToken(data.sessionToken)
             })
 
@@ -117,7 +119,10 @@ class UserLogic extends React.Component<userProps, UserVars> {
             .then((data) => {
                 console.log("DATA FOR SETSTATE TOKEN", data)
                 console.log("Data for UserId", data.user.id)
+                console.log("Data for Username", data.user.username)
+                console.log("Data for hasAdmin?", data.user.hasAdmin)
                 // this.setState({userId: {data.user.id}})
+                // this.setState(this.hasAdmin:{data.user.hasAdmin})
                 this.props.updateToken(data.sessionToken)
             })
 

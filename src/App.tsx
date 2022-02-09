@@ -8,6 +8,7 @@ import NavBar from './components/NavBar/NavBar';
 export interface tokenState {
   sessionToken: string 
   token: string | null
+  hasAdmin: boolean
 }
 
 class App extends React.Component<{}, tokenState> {
@@ -16,6 +17,7 @@ class App extends React.Component<{}, tokenState> {
     this.state = {
       sessionToken: " ",
       token: " ",
+      hasAdmin: false
     }
   }
 
