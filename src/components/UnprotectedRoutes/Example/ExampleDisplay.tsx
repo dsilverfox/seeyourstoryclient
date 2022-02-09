@@ -9,7 +9,7 @@ const ExampleDisplay = () => {
                     className="d-block w-100"
                     src="https://dsilverfox.github.io/Assets/SilverfoxWQuill%20(2).jpg"
                     alt="First slide"
-                    height="710px"
+                    height="600rem"
                 />
                 <Carousel.Caption className="caption">
                     <p>My company logo.</p>
@@ -20,7 +20,7 @@ const ExampleDisplay = () => {
                     className="d-block w-100"
                     src="https://dsilverfox.github.io/Assets/Build%20in%20Progress.PNG"
                     alt="Second slide"
-                    height="710px"
+                    height="600rem"
                 />
 
                 <Carousel.Caption className="caption">
@@ -32,7 +32,7 @@ const ExampleDisplay = () => {
                     className="d-block w-100"
                     src="https://dsilverfox.github.io/Assets/Build%20in%20Progress.PNG"
                     alt="Third slide"
-                    height="710px"
+                    height="600rem"
                 />
 
                 <Carousel.Caption className="caption">

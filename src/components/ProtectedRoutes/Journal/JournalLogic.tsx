@@ -1,21 +1,21 @@
 import React from 'react';
-import { tokenState } from '../../../App';
 
-interface journalProps extends tokenState {
+interface journalProps{
+    sessionToken: string
+}
+
+interface journalVars {
     title: { value: string; }
     content: { value: string; }
 }
 
-class JournalLogic extends React.Component<tokenState, journalProps> {
+class JournalLogic extends React.Component<journalProps, journalVars> {
     constructor(props: journalProps) {
         super(props)
 
         this.state = {
             title: { value: '' },
             content: { value: '' },
-            sessionToken: " ",
-            token: " ",
-            updateToken: " ",
         }
     }
 
@@ -30,8 +30,9 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
                 }
             }),
             headers: new Headers({
+                "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.token}`
+                "Authorization": `Bearer ${this.props.sessionToken}`
             }),
         })
             .then((res) => res.json())
@@ -53,8 +54,9 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
                 }
             }),
             headers: new Headers({
+                "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.token}`
+                "Authorization": `Bearer ${this.props.sessionToken}`
             }),
         })
             .then((res) => res.json())
@@ -71,8 +73,9 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
         await fetch("https://seeyourstoryserver.herokuapp.com/journal/delete/:journalId", {
             method: "DELETE",
             headers: new Headers({
+                "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.token}`
+                "Authorization": `Bearer ${this.props.sessionToken}`
             })
         })
     }
@@ -82,8 +85,9 @@ class JournalLogic extends React.Component<tokenState, journalProps> {
         fetch("https://seeyourstoryserver.herokuapp.com/journal/view/:journalId", {
             method: 'GET',
             headers: new Headers({
+                "Accept": "application/json",
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.token}`
+                'Authorization': `Bearer ${this.props.sessionToken}`
             }),
         })
 

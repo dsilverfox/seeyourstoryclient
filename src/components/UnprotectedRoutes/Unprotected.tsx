@@ -1,19 +1,17 @@
 import React from 'react';
 import ExampleDisplay from './Example/ExampleDisplay';
 // import AuthDisplay from "./Auth/AuthDisplay"
-import UserLogic from '../ProtectedRoutes/User/UserLogic';
+import UserLogic from './User/UserLogic';
 
 interface loginProps {
-  sessionToken: string|null,
-  token: string | null,
-  updateToken: string
-
-}
+  updateToken: (newToken: string) => void
+  }
 
 const Unprotected = (props: loginProps) => {
+  console.log(props)
     return (
         <div>
-          <UserLogic sessionToken={props.sessionToken} token={props.token} updateToken={props.updateToken}/>
+          <UserLogic updateToken={props.updateToken} />
           <ExampleDisplay/>
         </div>
     )

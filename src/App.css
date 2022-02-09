@@ -9,7 +9,7 @@
   color: white;
 }
 .Logo {
-  margin-left:-350px;
+  margin-left:-5rem;
   padding: 5px;
 }
 
@@ -20,7 +20,8 @@
 .carousel {
   width: 60rem;
   height: 35rem;
-  margin-left: 7rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .UserInput{

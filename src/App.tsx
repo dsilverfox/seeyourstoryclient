@@ -6,22 +6,19 @@ import NavBar from './components/NavBar/NavBar';
 
 
 export interface tokenState {
-  sessionToken: string | null
+  sessionToken: string 
   token: string | null
-  updateToken: any
-  //correct updateToken to a real type just trying to get anything to display at all.
 }
 
-
 class App extends React.Component<{}, tokenState> {
-  constructor(props: tokenState) {
+  constructor(props: {}) {
     super(props)
     this.state = {
       sessionToken: " ",
       token: " ",
-      updateToken: " ",
     }
   }
+
 //If the user already has a token, get the token
   componentDidMount() {
     if (localStorage.getItem('token')) {
@@ -32,22 +29,22 @@ class App extends React.Component<{}, tokenState> {
 //If the user doesn't yet have a token, assign a token based on sign in
 // RETURN NEWTOKEN ENTERED TO FIX ERROR BEING CALLED ON UPDATE TOKEN FUNCTION
   updateToken = (newToken: string) => {
-    const sessionToken = this.state.sessionToken;
+    //const sessionToken only exists to create shorthand
     localStorage.setItem('token', newToken);
     this.setState({ sessionToken: newToken });
-    console.log(sessionToken);
-    return newToken;
   }
 
   //When the user logs out clear the token
   clearToken = () => {
     localStorage.clear();
     this.setState({ sessionToken: " " })
+    console.log(this.state.sessionToken)
   }
 
 //If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected token={this.state.sessionToken} updateToken={this.state.updateToken} /> : <Unprotected sessionToken={this.state.sessionToken} token={this.state.token} updateToken={this.state.updateToken} />)
+    console.log("Session Token on APP.JS", this.state.sessionToken)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} /> : <Unprotected   updateToken={this.updateToken} />)
   }
 
   render() {

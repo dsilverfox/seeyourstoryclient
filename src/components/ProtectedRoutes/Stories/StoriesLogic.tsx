@@ -1,46 +1,49 @@
 import React from 'react';
-import { tokenState } from '../../../App';
-const Radium = require('radium');
 
-interface storyProps extends tokenState {
+interface storyProps {
+    sessionToken: string
+}
+
+interface storyVars {
     title: {value: string;}
     content: {value: string;}
     stories: {}[]
 }
 
-class StoriesLogic extends React.Component <tokenState, storyProps> {
+class StoriesLogic extends React.Component <storyProps, storyVars> {
     constructor(props: storyProps){
         super(props)
 
         this.state = {
             title: {value:''},
             content: {value: ''},
-            sessionToken: " ",
-            token: " ",
-            updateToken: " ",
             stories: [{}]
         }
+        
     }
 
     createStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
+        console.log("story title:", this.state.title.value)
+        console.log("story content:", this.state.content.value)
+        console.log("Session token on Story Create", this.props.sessionToken)
         fetch("https://seeyourstoryserver.herokuapp.com/story/create", {
             method: "POST",
             body: JSON.stringify({
                 story: {
-                    title: this.state.title,
-                    content: this.state.content,
+                    title: this.state.title.value,
+                    content: this.state.content.value,
                 }
             }),
             headers: new Headers({
+                "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.token}`
+                "Authorization": `Bearer ${this.props.sessionToken}`
             }),
         })
         .then((res) => res.json())
         .then((storyData) => {
-            this.setState({title: this.state.title})
-            this.setState({content: this.state.content})
+            console.log(storyData)
         })
     }
 
@@ -51,13 +54,14 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
             method: "PUT",
             body: JSON.stringify({
                 story: {
-                    title: this.state.title,
-                    content: this.state.content,
+                    title: this.state.title.value,
+                    content: this.state.content.value,
                 }
             }),
             headers: new Headers({
+                "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.token}`
+                "Authorization": `Bearer ${this.props.sessionToken}`
             }),
         })
             .then((res) => res.json())
@@ -74,8 +78,9 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
         await fetch("https://seeyourstoryserver.herokuapp.com/story/delete/:storyId", {
             method: "DELETE",
             headers: new Headers({
+                "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.token}`
+                "Authorization": `Bearer ${this.props.sessionToken}`
             })
         })
     }
@@ -86,8 +91,9 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
         fetch("https://seeyourstoryserver.herokuapp.com/story/view", {
             method: 'GET',
             headers: new Headers({
+                "Accept": "application/json",
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.token}`
+                'Authorization': `Bearer ${this.props.sessionToken}`
             }),
         })
 
@@ -103,8 +109,9 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
         fetch("https://seeyourstoryserver.herokuapp.com/story/view/:storyId", {
             method: 'GET',
             headers: new Headers({
+                "Accept": "application/json",
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.token}`
+                'Authorization': `Bearer ${this.props.sessionToken}`
             }),
         })
 
@@ -122,6 +129,7 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
     }
 
     render() {
+        
         return(
             <div>
 
@@ -133,7 +141,7 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
 
 
                     <label>Content:</label>
-                    <input type="password"
+                    <input type="text"
                         value={this.state.content.value}
                         onChange={this.handleContent}></input>
                     <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
@@ -148,4 +156,4 @@ class StoriesLogic extends React.Component <tokenState, storyProps> {
     }
 }
 
-export default Radium(StoriesLogic);
+export default StoriesLogic;
