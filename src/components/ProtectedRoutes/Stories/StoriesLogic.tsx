@@ -38,7 +38,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
             headers: new Headers({
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.sessionToken}`
+                "Authorization": `${this.props.sessionToken}`
             }),
         })
         .then((res) => res.json())
