@@ -84,6 +84,8 @@ class UserLogic extends React.Component<userProps, UserVars> {
             .then((data) => {
                 console.log("DATA FOR SETSTATE TOKEN", data)
                 console.log("Data for UserId", data.user.id)
+                console.log("Data for Username", data.user)
+                console.log("Data for hasAdmin?", data.user.hasAdmin)
                 this.props.updateToken(data.sessionToken)
             })
 
