@@ -106,7 +106,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
 
     }
 
-    //VIEW ALL STORIES
+    //VIEW ONE STORIES
     viewoneStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         fetch("https://seeyourstoryserver.herokuapp.com/story/view/:storyId", {
