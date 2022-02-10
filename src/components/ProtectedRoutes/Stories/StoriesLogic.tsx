@@ -181,7 +181,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
     //FUNCTION TO DETERMINE SHOULD STORY CARDS BE SHOWING
     storyShow = () => {
-        (this.state.viewallFire === true ? this.storyMapper(); : null);
+        (this.state.viewallFire ? this.storyMapper() : null);
     }
 
     render(): React.ReactNode {
