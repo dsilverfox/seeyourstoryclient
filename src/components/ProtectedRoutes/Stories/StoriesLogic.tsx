@@ -102,6 +102,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
             .then((res) => res.json())
             .then((storyData) => {
                this.setState({stories: storyData});
+               console.log(this.state.stories);
             });
 
     }

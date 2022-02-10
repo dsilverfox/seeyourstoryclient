@@ -1,10 +1,13 @@
 import React from 'react';
 import StoriesLogic from './Stories/StoriesLogic'
 import AdminLogic from './Admin/AdminLogic'
+import UserDisplay from '../UnprotectedRoutes/User/UserDisplay'
 
 interface protectedProps {
     sessionToken: string | null
     hasAdmin: boolean
+    username: string,
+    userId: string
 }
 
 class Protected extends React.Component <protectedProps, {}> {
@@ -21,7 +24,7 @@ class Protected extends React.Component <protectedProps, {}> {
             {this.adminUser()}
 
             <StoriesLogic sessionToken={this.props.sessionToken} />
-            
+            <UserDisplay username={this.props.username} userId={this.props.userId} />
             I will hold Admin, Characters, Journal, Stories and User
         </div>
     )

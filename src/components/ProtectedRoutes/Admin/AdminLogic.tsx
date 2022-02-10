@@ -43,7 +43,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
             headers: new Headers({
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization":`Bearer ${this.props.sessionToken}`
+                "Authorization":`${this.props.sessionToken}`
             })
         })
         .then(() => this.viewUsers(event));

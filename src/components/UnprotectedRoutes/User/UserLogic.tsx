@@ -1,10 +1,12 @@
 import React from "react";
-import UserDisplay from './UserDisplay';
 
 // import {Alert} from 'react-bootstrap';
 interface userProps {
     updateToken: (newToken: string) => void 
     setAdmin: (b: boolean) => void
+    setUsername: (s: string) => void
+    setUserId: (i: string) => void
+    sessionToken: string | null
 }
 
 // export interface UserVars extends tokenState {
@@ -90,6 +92,8 @@ class UserLogic extends React.Component<userProps, UserVars> {
                 // console.log("Data for Username", data.user)
                 // console.log("Data for hasAdmin?", data.user.hasAdmin)
                 this.props.updateToken(data.sessionToken)
+                this.props.setUsername(data.user.username)
+                this.props.setUserId(data.user.id)
             })
 
             .catch(error => {
@@ -125,7 +129,8 @@ class UserLogic extends React.Component<userProps, UserVars> {
                 this.setState({userId: data.user.id})
                 this.props.setAdmin(data.user.hasAdmin)
                 this.props.updateToken(data.sessionToken)
-
+                this.props.setUsername(data.user.username)
+                this.props.setUserId(data.user.id)
             })
 
             .catch(error => {
@@ -134,16 +139,16 @@ class UserLogic extends React.Component<userProps, UserVars> {
     }
 
 //DELETE USER ACCOUNT
-    // deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    //     event.preventDefault();
-    //     await fetch("https://seeyourstoryserver.herokuapp.com/auth/delete/:id", {
-    //         method: "DELETE",
-    //         headers: new Headers({
-    //             "Content-Type": "application/json",
-    //             "Authorization": `Bearer ${this.props.token}`
-    //         })
-    //     })
-    // }
+    deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+        await fetch("https://seeyourstoryserver.herokuapp.com/auth/delete/:id", {
+            method: "DELETE",
+            headers: new Headers({
+                "Content-Type": "application/json",
+                "Authorization": `${this.props.sessionToken}`
+            })
+        })
+    }
 
     handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({username: {value: event.target.value}})
@@ -171,11 +176,11 @@ class UserLogic extends React.Component<userProps, UserVars> {
 
                     <button onClick={(event) => { this.loginUsers(event) }}>Login</button>
                     <button onClick={(event) => { this.registerUsers(event) }}>Register</button>
-
+                    {/* <button onClick={(event) => { this.deleteUserAccount(event) }}>Delete Account</button> */}
                 </form>
-                <UserDisplay username={this.state.username.value} userId={this.state.userId} />
 
-                {/* <button onClick={(event) => { this.deleteUserAccount(event) }}>Delete Account</button> */}
+
+
             </div>
         )
     }

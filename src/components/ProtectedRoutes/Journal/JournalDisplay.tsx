@@ -1,12 +1,18 @@
 import React from 'react';
 
-const JournalDisplay = () => {
-    return (
-        <div>
-            I AM THE JournalDisplay!
-            I Will need a TERNARY to display the new journal button or the existing journal with an edit and delete button.
-        </div>
-    )
+class StoriesDisplay extends React.Component {
+    constructor() {
+        super()
+    }
+    render() {
+        return (
+            <div>
+                I AM THE Journals Display!
+                I will display the stories that the user has.
+                Selecting a story will display characters.
+            </div>
+        )
+    }
 }
 
-export default JournalDisplay;
+export default StoriesDisplay;

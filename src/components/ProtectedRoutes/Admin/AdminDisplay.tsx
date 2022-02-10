@@ -1,12 +1,18 @@
 import React from 'react';
 
-const AdminDisplay = () => {
-    return (
-        <div>
-            I AM THE Admin Display!
-            I will hold the All Users button and the Delete Any User by ID button.
-        </div>
-    )
+class StoriesDisplay extends React.Component {
+    constructor() {
+        super()
+    }
+    render() {
+        return (
+            <div>
+                I AM THE Admin Display!
+                I will display the stories that the user has.
+                Selecting a story will display characters.
+            </div>
+        )
+    }
 }
 
-export default AdminDisplay;
+export default StoriesDisplay;

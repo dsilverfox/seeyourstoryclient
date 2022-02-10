@@ -12,15 +12,16 @@ class UsersDisplay extends React.Component<UserDisplayProps, {}> {
     }
 
     render() {
+        console.log("UserName at User Display", this.props.username)
+        console.log("UserID at User Display", this.props.userId)
         return (
             <div>
                 <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
+                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <Card.Title>Welcome {this.props.username}</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
+                            Your user ID is {this.props.userId}
                         </Card.Text>
                         <Button variant="primary">Go somewhere</Button>
                     </Card.Body>

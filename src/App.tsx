@@ -8,6 +8,8 @@ import NavBar from './components/NavBar/NavBar';
 export interface tokenState {
   sessionToken: string | null
   hasAdmin: boolean
+  username: string,
+  userId: string
 }
 
 class App extends React.Component<{}, tokenState> {
@@ -15,7 +17,9 @@ class App extends React.Component<{}, tokenState> {
     super(props)
     this.state = {
       sessionToken: "",
-      hasAdmin: false
+      hasAdmin: false,
+      username: "",
+      userId: "",
     }
   }
 
@@ -46,10 +50,18 @@ class App extends React.Component<{}, tokenState> {
     this.setState({hasAdmin: b})
   } 
 
+  setUsername =(s: string) => {
+    this.setState({username: s})
+  }
+
+  setUserId =(i: string) => {
+    this.setState({userId: i})
+  }
+
 //If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
     console.log("Session Token on APP.JS", this.state.sessionToken)
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin}  /> : <Unprotected  updateToken={this.updateToken} setAdmin={this.setAdmin} />)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId}  /> : <Unprotected  updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId}/>)
   }
 
   render() {

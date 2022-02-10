@@ -6,17 +6,23 @@ import UserLogic from './User/UserLogic';
 interface loginProps {
   updateToken: (newToken: string) => void
   setAdmin: (b: boolean) => void
-  }
-  
-
-const Unprotected = (props: loginProps) => {
-  console.log(props)
-    return (
-        <div>
-          <UserLogic updateToken={props.updateToken} setAdmin={props.setAdmin} />
-          <ExampleDisplay/>
-        </div>
-    )
+  setUsername: (s: string) => void
+  setUserId: (i: string) => void
 }
 
+
+class Unprotected extends React.Component<loginProps, {}> {
+  constructor(props: loginProps) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div>
+        <UserLogic updateToken={this.props.updateToken} setAdmin={this.props.setAdmin} setUsername={this.props.setUsername} setUserId={this.props.setUserId} />
+        <ExampleDisplay />
+      </div>
+    )
+  }
+}
 export default Unprotected;
