@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface AdminProps {
-    sessionToken: string
+    sessionToken: string | null
 }
 interface AdminVars {
     users: object
@@ -24,11 +24,13 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
             method: "GET",
             headers: new Headers({
                 "Accept": "application/json",
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": `${this.props.sessionToken}`
             }),
         })
         .then((res)=> res.json())
         .then((users) => {
+            console.log(users);
             this.setState({users:{users}});
         })
     }

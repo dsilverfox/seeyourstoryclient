@@ -6,8 +6,7 @@ import NavBar from './components/NavBar/NavBar';
 
 
 export interface tokenState {
-  sessionToken: string 
-  token: string | null
+  sessionToken: string | null
   hasAdmin: boolean
 }
 
@@ -15,8 +14,7 @@ class App extends React.Component<{}, tokenState> {
   constructor(props: {}) {
     super(props)
     this.state = {
-      sessionToken: " ",
-      token: " ",
+      sessionToken: "",
       hasAdmin: false
     }
   }
@@ -43,10 +41,15 @@ class App extends React.Component<{}, tokenState> {
     console.log(this.state.sessionToken)
   }
 
+  //Set State for hasAdmin
+  setAdmin = (b: boolean) => {
+    this.setState({hasAdmin: b})
+  } 
+
 //If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
     console.log("Session Token on APP.JS", this.state.sessionToken)
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} /> : <Unprotected   updateToken={this.updateToken} />)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin}  /> : <Unprotected  updateToken={this.updateToken} setAdmin={this.setAdmin} />)
   }
 
   render() {
@@ -61,4 +64,5 @@ class App extends React.Component<{}, tokenState> {
 
 
 export default App;
+
 //updateToken={updateToken}

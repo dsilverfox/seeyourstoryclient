@@ -1,16 +1,18 @@
 import React from "react";
+import UserDisplay from './UserDisplay';
 
 // import {Alert} from 'react-bootstrap';
 interface userProps {
-    updateToken: (newToken: string) => void
+    updateToken: (newToken: string) => void 
+    setAdmin: (b: boolean) => void
 }
 
 // export interface UserVars extends tokenState {
 export interface UserVars {
     username: {value: string},
     password: {value: string},
-    hasAdmin: boolean
-    // userId: string,
+    userId: string,
+    //Give USER ID an actual value when you find out how.
 }
 //REGEX Variables
 // const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})");
@@ -25,8 +27,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
             // updateToken: " ",
             username: { value: '' },
             password: { value: '' },
-            hasAdmin: false
-            // userId: ''
+            userId: ''
         }
         // this.analyze = this.analyze.bind(this);
     }
@@ -121,9 +122,10 @@ class UserLogic extends React.Component<userProps, UserVars> {
                 console.log("Data for UserId", data.user.id)
                 console.log("Data for Username", data.user.username)
                 console.log("Data for hasAdmin?", data.user.hasAdmin)
-                // this.setState({userId: {data.user.id}})
-                // this.setState(this.hasAdmin:{data.user.hasAdmin})
+                this.setState({userId: data.user.id})
+                this.props.setAdmin(data.user.hasAdmin)
                 this.props.updateToken(data.sessionToken)
+
             })
 
             .catch(error => {
@@ -171,6 +173,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
                     <button onClick={(event) => { this.registerUsers(event) }}>Register</button>
 
                 </form>
+                <UserDisplay username={this.state.username.value} userId={this.state.userId} />
 
                 {/* <button onClick={(event) => { this.deleteUserAccount(event) }}>Delete Account</button> */}
             </div>

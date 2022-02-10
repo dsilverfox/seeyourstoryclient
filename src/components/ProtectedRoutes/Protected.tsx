@@ -3,21 +3,28 @@ import StoriesLogic from './Stories/StoriesLogic'
 import AdminLogic from './Admin/AdminLogic'
 
 interface protectedProps {
-    sessionToken: string
+    sessionToken: string | null
+    hasAdmin: boolean
 }
 
-const Protected = (props:protectedProps) => {
-
-    // adminViews = () => {
-        
-    //     return (this.state.sessionToken === localStorage.getItem('token') ? <Protected sessionToken={this.state.sessionToken} /> : <Unprotected updateToken={this.updateToken} />)
+class Protected extends React.Component <protectedProps, {}> {
+    constructor(props: protectedProps) {
+        super(props)
+    }
+    adminUser = () => {
+     return (this.props.hasAdmin === true ? <AdminLogic sessionToken={this.props.sessionToken} /> : null)
+    }
+    render() {
     return (
         <div>
-            <StoriesLogic sessionToken={props.sessionToken} />
-            <AdminLogic sessionToken={props.sessionToken} />
+            {this.adminUser()}
+
+            <StoriesLogic sessionToken={this.props.sessionToken} />
+            
             I will hold Admin, Characters, Journal, Stories and User
         </div>
     )
+    }
 }
 
 export default Protected;

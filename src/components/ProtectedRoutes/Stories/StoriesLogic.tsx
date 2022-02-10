@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface storyProps {
-    sessionToken: string
+    sessionToken: string | null
 }
 
 interface storyVars {
