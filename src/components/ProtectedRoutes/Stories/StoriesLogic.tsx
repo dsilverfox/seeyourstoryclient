@@ -144,11 +144,13 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 <>
                     <Card key={index} style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>{this.state.stories.title}</Card.Title>
-                            <Card.Subtitle>Story ID: {this.state.stories.id}</Card.Subtitle>
-                            <Card.Text>{this.state.stories.content}
+                            <Card.Title>{story.title}</Card.Title>
+                            <Card.Subtitle>Story ID: {story.id}</Card.Subtitle>
+                            <Card.Text>{story.content}
                             </Card.Text>
                             <Button variant="primary" onClick={(event) => this.viewoneStory(event)}>Select Story</Button>
+                            <Button variant="primary" onClick={(event)=> this.editStory(event)}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event)=> this.deleteStory}>Delete Story</Button>
                         </Card.Body>
                     </Card>
                 </>
@@ -156,7 +158,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         });
     };
 
-    render() {
+    render():React.ReactNode {
 
         return (
             <div>
@@ -176,12 +178,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 </form>
 
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
+                <br/>
                 <>{this.storyMapper()}</>
-                {/* <div>
-                    {this.storyMapper()}
-                </div> */}
-                {/* <button onClick={(event) => { this.editStory(event) }}>Edit Story</button> */}
-                {/* <button onClick={(event) => { this.deleteStory(event) }}>Delete Story</button> */}
             </div>
         )
     }
