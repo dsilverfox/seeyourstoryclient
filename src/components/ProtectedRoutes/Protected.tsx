@@ -25,7 +25,6 @@ class Protected extends React.Component <protectedProps, {}> {
 
             <StoriesLogic sessionToken={this.props.sessionToken} />
             <UserDisplay username={this.props.username} userId={this.props.userId} />
-            I will hold Admin, Characters, Journal, Stories and User
         </div>
     )
     }

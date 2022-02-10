@@ -8,6 +8,7 @@ interface loginProps {
   setAdmin: (b: boolean) => void
   setUsername: (s: string) => void
   setUserId: (i: string) => void
+  sessionToken: string
 }
 
 
@@ -19,7 +20,7 @@ class Unprotected extends React.Component<loginProps, {}> {
   render() {
     return (
       <div>
-        <UserLogic updateToken={this.props.updateToken} setAdmin={this.props.setAdmin} setUsername={this.props.setUsername} setUserId={this.props.setUserId} />
+        <UserLogic updateToken={this.props.updateToken} setAdmin={this.props.setAdmin} setUsername={this.props.setUsername} setUserId={this.props.setUserId} sessionToken={this.sessionToken} />
         <ExampleDisplay />
       </div>
     )

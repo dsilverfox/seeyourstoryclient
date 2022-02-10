@@ -61,7 +61,7 @@ class App extends React.Component<{}, tokenState> {
 //If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
     console.log("Session Token on APP.JS", this.state.sessionToken)
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId}  /> : <Unprotected  updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId}/>)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId}  /> : <Unprotected  sessionToken={this.sessionToken} updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId}/>)
   }
 
   render() {

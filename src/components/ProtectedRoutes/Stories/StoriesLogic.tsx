@@ -1,25 +1,26 @@
 import React from 'react';
+import { Card, Button } from 'react-bootstrap'
 
 interface storyProps {
     sessionToken: string | null
 }
 
 interface storyVars {
-    title: {value: string;}
-    content: {value: string;}
-    stories: object
+    title: { value: string; }
+    content: { value: string; }
+    stories: object[]
 }
 
-class StoriesLogic extends React.Component <storyProps, storyVars> {
-    constructor(props: storyProps){
+class StoriesLogic extends React.Component<storyProps, storyVars> {
+    constructor(props: storyProps) {
         super(props)
 
         this.state = {
-            title: {value:''},
-            content: {value: ''},
-            stories: {}
+            title: { value: '' },
+            content: { value: '' },
+            stories: [{}]
         }
-        
+
     }
 
     createStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -41,14 +42,14 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
                 "Authorization": `${this.props.sessionToken}`
             }),
         })
-        .then((res) => res.json())
-        .then((storyData) => {
-            console.log(storyData)
-        })
+            .then((res) => res.json())
+            .then((storyData) => {
+                console.log(storyData)
+            })
             .catch(error => {
                 console.log(error)
             });
-    } 
+    }
 
     //EDIT STORY
     editStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -101,10 +102,11 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
         })
             .then((res) => res.json())
             .then((storyData) => {
-               this.setState({stories: storyData});
-               console.log(this.state.stories);
+                this.setState({ stories: storyData });
+                console.log(this.state.stories);
+                console.log(this.state.stories[1].id)
             });
-
+        this.storyMapper();
     }
 
     //VIEW ONE STORIES
@@ -132,9 +134,27 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
         this.setState({ content: { value: event.target.value } })
     }
 
+    storyMapper = () => {
+        return this.state.stories.map((story, index) => {
+            return (
+                <>
+                    <Card key={index} style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>{this.state.title}</Card.Title>
+                            <Card.Subtitle>Story ID: {this.state.stories.id}</Card.Subtitle>
+                            <Card.Text>{this.state.content}
+                            </Card.Text>
+                            <Button variant="primary" onClick={(event) => this.viewoneStory(event)}>Select Story</Button>
+                        </Card.Body>
+                    </Card>
+                </>
+            );
+        });
+    };
+
     render() {
-        
-        return(
+
+        return (
             <div>
 
                 <form>
@@ -151,8 +171,10 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
                     <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
                 </form>
 
-                {/* <button onClick={(event) => { this.viewoneStory(event) }}>View Selected Story</button> */}
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
+                {/* <div>
+                    {this.storyMapper()}
+                </div> */}
                 {/* <button onClick={(event) => { this.editStory(event) }}>Edit Story</button> */}
                 {/* <button onClick={(event) => { this.deleteStory(event) }}>Delete Story</button> */}
             </div>

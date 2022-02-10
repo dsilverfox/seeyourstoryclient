@@ -12,7 +12,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     constructor(props: AdminProps){
         super(props)
         this.state = {
-            id: { value: '' },
+            id: { value:""},
             users: {},
         }
     }
@@ -50,7 +50,11 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     }
     
     handleID = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ id: { value: event.target.value } })
+        this.setState({ id: { value: event.target.value }}, () => {
+            console.log("ID State", this.state.id)
+        })
+        console.log("Event.Target", event.target.value)
+       
     }
 
     render() {
