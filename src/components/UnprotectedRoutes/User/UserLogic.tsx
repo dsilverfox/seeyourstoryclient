@@ -14,8 +14,8 @@ export interface UserVars {
     username: {value: string},
     password: {value: string},
     userId: string,
-    //Give USER ID an actual value when you find out how.
 }
+
 //REGEX Variables
 // const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})");
 // const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
@@ -163,7 +163,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
             <div className="UserInput">
                 <form>
                     <label>Username:</label>
-                    <input type="email" placeholder="Enter an email"
+                    <input type="email" placeholder="Enter a Username"
                     value={this.state.username.value}
                     onChange={this.handleUsername}></input>
 

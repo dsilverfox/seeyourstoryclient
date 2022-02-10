@@ -162,7 +162,6 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
         return (
             <div>
-
                 <form>
                     <label>Title:</label>
                     <input type="text" placeholder="Enter your Story Title"
@@ -176,10 +175,11 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                         onChange={this.handleContent}></input>
                     <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
                 </form>
-
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
-                <br/>
+                
+                <div>
                 <>{this.storyMapper()}</>
+                </div>
             </div>
         )
     }

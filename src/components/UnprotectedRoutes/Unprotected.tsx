@@ -20,7 +20,7 @@ class Unprotected extends React.Component<loginProps, {}> {
   render() {
     return (
       <div>
-        <UserLogic updateToken={this.props.updateToken} setAdmin={this.props.setAdmin} setUsername={this.props.setUsername} setUserId={this.props.setUserId} sessionToken={this.sessionToken} />
+        <UserLogic updateToken={this.props.updateToken} setAdmin={this.props.setAdmin} setUsername={this.props.setUsername} setUserId={this.props.setUserId} sessionToken={this.props.sessionToken} />
         <ExampleDisplay />
       </div>
     )
