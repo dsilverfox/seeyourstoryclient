@@ -22,7 +22,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         this.state = {
             title: { value: '' },
             content: { value: '' },
-            stories: [{}]
+            stories: [{id:'', title:'', content:''}]
         }
 
     }
@@ -176,6 +176,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 </form>
 
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
+                <>{this.storyMapper()}</>
                 {/* <div>
                     {this.storyMapper()}
                 </div> */}
