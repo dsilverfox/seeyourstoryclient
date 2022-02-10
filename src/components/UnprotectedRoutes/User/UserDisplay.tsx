@@ -16,7 +16,7 @@ class UsersDisplay extends React.Component<UserDisplayProps, {}> {
         console.log("UserID at User Display", this.props.userId)
         return (
             <div>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '10rem' }}>
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <Card.Title>Welcome {this.props.username}</Card.Title>

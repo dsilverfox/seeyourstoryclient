@@ -8,7 +8,6 @@ interface protectedProps {
     hasAdmin: boolean
     username: string,
     userId: string
-    setStoryId: (s: string) => void
 }
 
 class Protected extends React.Component<protectedProps, {}> {
@@ -24,7 +23,7 @@ class Protected extends React.Component<protectedProps, {}> {
             <div>
                 {this.adminUser()}
                 <UserDisplay username={this.props.username} userId={this.props.userId} />
-                <StoriesLogic sessionToken={this.props.sessionToken} setStoryId={this.props.setStoryId}/>
+                <StoriesLogic sessionToken={this.props.sessionToken} />
 
             </div>
         )

@@ -3,7 +3,6 @@ import { Card, Button } from 'react-bootstrap'
 
 interface storyProps {
     sessionToken: string | null
-    setStoryId: (s: string) => void
 }
 
 interface storyVars {
@@ -15,6 +14,7 @@ interface storyVars {
         content: string
     }[]
     viewallFire: boolean
+    storyId: string
 }
 
 class StoriesLogic extends React.Component<storyProps, storyVars> {
@@ -25,7 +25,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             title: { value: '' },
             content: { value: '' },
             stories: [{ id: '', title: '', content: '' }],
-            viewallFire: false
+            viewallFire: false,
+            storyId: '',
         }
 
     }
@@ -79,7 +80,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .then((storyData) => {
                 this.setState({ title: this.state.title })
                 this.setState({ content: this.state.content })
-                this.props.setStoryId({storyId: storyData.id})
+                this.setState({ storyId: storyData.id})
             })
     }
 
@@ -133,6 +134,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .then((res) => res.json())
             .then((storyData) => {
                 this.setState({ stories: storyData });
+                this.setState({ storyId: storyData.id })
+                console.log(this.state.storyId)
             });
     }
 
@@ -179,15 +182,12 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         )
     }
 
-    //FUNCTION TO DETERMINE SHOULD STORY CARDS BE SHOWING
-    storyShow = () => {
-        (this.state.viewallFire ? this.storyMapper() : null);
-    }
 
     render(): React.ReactNode {
 
         return (
             <div>
+                {/* Create a story. */}
                 <form>
                     <label>Title:</label>
                     <input type="text" placeholder="Enter your Story Title"
@@ -204,7 +204,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
 
                 <div>
-                    <>{this.storyMapper()}</>
+                    <>{this.state.viewallFire && this.storyMapper()}</>
                 </div>
             </div>
         )
