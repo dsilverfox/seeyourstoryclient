@@ -8,7 +8,11 @@ interface storyProps {
 interface storyVars {
     title: { value: string; }
     content: { value: string; }
-    stories: object[]
+    stories: {
+        id: string,
+        title: string,
+        content: string
+    }[]
 }
 
 class StoriesLogic extends React.Component<storyProps, storyVars> {
@@ -140,9 +144,9 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 <>
                     <Card key={index} style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>{this.state.title}</Card.Title>
+                            <Card.Title>{this.state.stories.title}</Card.Title>
                             <Card.Subtitle>Story ID: {this.state.stories.id}</Card.Subtitle>
-                            <Card.Text>{this.state.content}
+                            <Card.Text>{this.state.stories.content}
                             </Card.Text>
                             <Button variant="primary" onClick={(event) => this.viewoneStory(event)}>Select Story</Button>
                         </Card.Body>
