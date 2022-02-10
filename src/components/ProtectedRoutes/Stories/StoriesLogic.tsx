@@ -7,7 +7,7 @@ interface storyProps {
 interface storyVars {
     title: {value: string;}
     content: {value: string;}
-    stories: {}[]
+    stories: object
 }
 
 class StoriesLogic extends React.Component <storyProps, storyVars> {
@@ -17,7 +17,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
         this.state = {
             title: {value:''},
             content: {value: ''},
-            stories: [{}]
+            stories: {}
         }
         
     }
@@ -64,7 +64,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
             headers: new Headers({
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.sessionToken}`
+                "Authorization": `${this.props.sessionToken}`
             }),
         })
             .then((res) => res.json())
@@ -83,7 +83,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
             headers: new Headers({
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.props.sessionToken}`
+                "Authorization": `${this.props.sessionToken}`
             })
         })
     }
@@ -96,7 +96,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
             headers: new Headers({
                 "Accept": "application/json",
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.sessionToken}`
+                'Authorization': `${this.props.sessionToken}`
             }),
         })
             .then((res) => res.json())
@@ -114,7 +114,7 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
             headers: new Headers({
                 "Accept": "application/json",
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.sessionToken}`
+                'Authorization': `${this.props.sessionToken}`
             }),
         })
 
@@ -150,10 +150,10 @@ class StoriesLogic extends React.Component <storyProps, storyVars> {
                     <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
                 </form>
 
-                {/* <button onClick={(event) => { this.viewoneStory(event) }}>View Selected Story</button>
+                {/* <button onClick={(event) => { this.viewoneStory(event) }}>View Selected Story</button> */}
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
-                <button onClick={(event) => { this.editStory(event) }}>Edit Story</button>
-                <button onClick={(event) => { this.deleteStory(event) }}>Delete Story</button> */}
+                {/* <button onClick={(event) => { this.editStory(event) }}>Edit Story</button> */}
+                {/* <button onClick={(event) => { this.deleteStory(event) }}>Delete Story</button> */}
             </div>
         )
     }
