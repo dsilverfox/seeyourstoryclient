@@ -4,10 +4,14 @@ import {Navbar, Container} from 'react-bootstrap'
 
 interface navProps {
       clickLogout:  React.MouseEventHandler<HTMLButtonElement>
+      username: string
+      userId: string
 }
-const AppBar = (props: navProps) => {
+class AppBar extends React.Component<navProps, {}> {
 
+    render(): React.ReactNode {
     return(
+        <>
         <Navbar bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href="#home">
@@ -22,9 +26,14 @@ const AppBar = (props: navProps) => {
                 </Navbar.Brand>
                
             </Container>
-            <button className="logout" onClick={props.clickLogout}> Logout </button>
+            Welcome, {this.props.username}
+            <br/>
+            UserID: {this.props.userId}
+            <button className="logout" onClick={this.props.clickLogout}> Logout </button>
         </Navbar>
+        </>
     )
+    }
 }
 
 

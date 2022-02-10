@@ -8,7 +8,7 @@ interface loginProps {
   setAdmin: (b: boolean) => void
   setUsername: (s: string) => void
   setUserId: (i: string) => void
-  sessionToken: string
+  sessionToken: string | null
 }
 
 

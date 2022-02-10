@@ -2,15 +2,20 @@
   text-align: center;
   background-color: black;
   color: silver;
-  height: 120vh;
+  width: 100vw;
+  height: 200vw;
 }
 .AppTitle{
   color: white;
 }
 .Logo {
-  margin-left:-5rem;
+  margin-left:-4rem;
   padding: 5px;
 }
+
+.logout {
+  margin: 2rem;
+ }
 
 .caption {
   color: black;

@@ -8,8 +8,9 @@ import NavBar from './components/NavBar/NavBar';
 export interface tokenState {
   sessionToken: string | null
   hasAdmin: boolean
-  username: string,
+  username: string
   userId: string
+  storyId: string
 }
 
 class App extends React.Component<{}, tokenState> {
@@ -20,6 +21,7 @@ class App extends React.Component<{}, tokenState> {
       hasAdmin: false,
       username: "",
       userId: "",
+      storyId:"",
     }
   }
 
@@ -31,9 +33,8 @@ class App extends React.Component<{}, tokenState> {
   }
 
 //If the user doesn't yet have a token, assign a token based on sign in
-// RETURN NEWTOKEN ENTERED TO FIX ERROR BEING CALLED ON UPDATE TOKEN FUNCTION
+
   updateToken = (newToken: string) => {
-    //const sessionToken only exists to create shorthand
     localStorage.setItem('token', newToken);
     this.setState({ sessionToken: newToken });
   }
@@ -58,16 +59,19 @@ class App extends React.Component<{}, tokenState> {
     this.setState({userId: i})
   }
 
+  setStoryId =(s: string) => {
+    this.setState({storyId: s})
+  }
 //If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
     console.log("Session Token on APP.JS", this.state.sessionToken)
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId}  /> : <Unprotected  sessionToken={this.sessionToken} updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId}/>)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected  sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId} setStoryId={this.setStoryId} /> : <Unprotected  sessionToken={this.state.sessionToken} updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId}/>)
   }
 
   render() {
     return (
       <div className="App">
-          <NavBar clickLogout={this.clearToken} />
+          <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId}/>
           {this.protectedViews()}
       </div>
     )

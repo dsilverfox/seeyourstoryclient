@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 
 interface storyProps {
     sessionToken: string | null
+    setStoryId: (s: string) => void
 }
 
 interface storyVars {
@@ -13,6 +14,7 @@ interface storyVars {
         title: string,
         content: string
     }[]
+    viewallFire: boolean
 }
 
 class StoriesLogic extends React.Component<storyProps, storyVars> {
@@ -22,7 +24,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         this.state = {
             title: { value: '' },
             content: { value: '' },
-            stories: [{id:'', title:'', content:''}]
+            stories: [{ id: '', title: '', content: '' }],
+            viewallFire: false
         }
 
     }
@@ -76,6 +79,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .then((storyData) => {
                 this.setState({ title: this.state.title })
                 this.setState({ content: this.state.content })
+                this.props.setStoryId({storyId: storyData.id})
             })
     }
 
@@ -110,10 +114,11 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 console.log(this.state.stories);
                 console.log(this.state.stories[1].id)
             });
-        this.storyMapper();
+            this.storyMapper();
+        this.setState({viewallFire: true});
     }
 
-    //VIEW ONE STORIES
+    //VIEW ONE STORY
     viewoneStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         fetch("https://seeyourstoryserver.herokuapp.com/story/view/:storyId", {
@@ -130,6 +135,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 this.setState({ stories: storyData });
             });
     }
+
+    //INPUT BASED SETSTATE
     handleTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ title: { value: event.target.value } })
     }
@@ -137,7 +144,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     handleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ content: { value: event.target.value } })
     }
-
+    //ARRAY MAP FOR DISPLAYING ALL STORIES
     storyMapper = () => {
         return this.state.stories.map((story, index) => {
             return (
@@ -149,8 +156,6 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             <Card.Text>{story.content}
                             </Card.Text>
                             <Button variant="primary" onClick={(event) => this.viewoneStory(event)}>Select Story</Button>
-                            <Button variant="primary" onClick={(event)=> this.editStory(event)}>Edit Story</Button>
-                            <Button variant="primary" onClick={(event)=> this.deleteStory}>Delete Story</Button>
                         </Card.Body>
                     </Card>
                 </>
@@ -158,7 +163,28 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         });
     };
 
-    render():React.ReactNode {
+    //FUNCTION FOR DISPLAYING ONE STORY
+    displayOne = () => {
+        return (
+            <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                    <Card.Title>{this.state.stories.title}</Card.Title>
+                    <Card.Subtitle>Story ID: {this.state.stories.id}</Card.Subtitle>
+                    <Card.Text>{this.state.stories.content}
+                    </Card.Text>
+                    <Button variant="primary" onClick={(event) => this.editStory(event)}>Edit Story</Button>
+                    <Button variant="primary" onClick={(event) => this.deleteStory}>Delete Story</Button>
+                </Card.Body>
+            </Card>
+        )
+    }
+
+    //FUNCTION TO DETERMINE SHOULD STORY CARDS BE SHOWING
+    storyShow = () => {
+        (this.state.viewallFire === true ? this.storyMapper(); : null);
+    }
+
+    render(): React.ReactNode {
 
         return (
             <div>
@@ -176,9 +202,9 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
                 </form>
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
-                
+
                 <div>
-                <>{this.storyMapper()}</>
+                    <>{this.storyMapper()}</>
                 </div>
             </div>
         )

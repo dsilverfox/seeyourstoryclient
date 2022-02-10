@@ -1,10 +1,8 @@
 import React from 'react';
 
 class StoriesDisplay extends React.Component {
-    constructor() {
-        super()
-    }
-    render() {
+
+    render(): React.ReactNode {
         return (
             <div>
                 I AM THE Admin Display!

@@ -8,25 +8,26 @@ interface protectedProps {
     hasAdmin: boolean
     username: string,
     userId: string
+    setStoryId: (s: string) => void
 }
 
-class Protected extends React.Component <protectedProps, {}> {
+class Protected extends React.Component<protectedProps, {}> {
     constructor(props: protectedProps) {
         super(props)
     }
     adminUser = () => {
         console.log(this.props.hasAdmin)
-     return (this.props.hasAdmin === true ? <AdminLogic sessionToken={this.props.sessionToken} /> : null)
+        return (this.props.hasAdmin === true ? <AdminLogic sessionToken={this.props.sessionToken} /> : null)
     }
     render() {
-    return (
-        <div>
-            {this.adminUser()}
+        return (
+            <div>
+                {this.adminUser()}
+                <UserDisplay username={this.props.username} userId={this.props.userId} />
+                <StoriesLogic sessionToken={this.props.sessionToken} setStoryId={this.props.setStoryId}/>
 
-            <StoriesLogic sessionToken={this.props.sessionToken} />
-            <UserDisplay username={this.props.username} userId={this.props.userId} />
-        </div>
-    )
+            </div>
+        )
     }
 }
 
