@@ -40,7 +40,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
         .then((res)=> res.json())
         .then((usersData) => {
             console.log(usersData);
-            this.setState({users: usersData});
+            this.setState({users: usersData.users});
         })
         this.userList();
         this.setState({userListFire: true})
