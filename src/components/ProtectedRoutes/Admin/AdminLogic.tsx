@@ -10,6 +10,7 @@ interface AdminVars {
         username: string,
     }[]
     id: { value: string }
+    userListFire: boolean
 }
 
 class AdminLogic extends React.Component <AdminProps, AdminVars> {
@@ -21,6 +22,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
                 id: "",
                 username: "",
             }],
+            userListFire: false,
         }
     }
 
@@ -41,6 +43,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
             this.setState({users: usersData});
         })
         this.userList();
+        this.setState({userListFire: true})
     }
 
 //DELETE A USER
@@ -73,6 +76,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     }
 
     render() {
+        console.log(this.state.users)
         return(
             <div className="Admin">
                 <h1>Greeting Admin!</h1>
@@ -97,7 +101,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
                     }
                 > Delete </button>
 
-                <>{this.userList()}</>
+                <>{this.state.userListFire && this.userList()}</>
                 
             </div>
         )

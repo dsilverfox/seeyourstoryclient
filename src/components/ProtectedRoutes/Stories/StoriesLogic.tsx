@@ -67,7 +67,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     editStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         event.preventDefault();
         await this.setState({ storyId: id })
-        fetch("https://seeyourstoryserver.herokuapp.com/story/update/:storyId", {
+        fetch(`https://seeyourstoryserver.herokuapp.com/story/update/${this.state.storyId}`, {
             method: "PUT",
             body: JSON.stringify({
                 stories: {
