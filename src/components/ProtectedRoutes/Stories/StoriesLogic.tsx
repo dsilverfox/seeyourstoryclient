@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Modal, Form} from 'react-bootstrap'
 
 interface storyProps {
     sessionToken: string | null
@@ -16,7 +16,8 @@ interface storyVars {
     viewallFire: boolean
     viewoneFire: boolean
     storyId: string
-    story: {id: string, title: string, content: string}
+    story: {id: string, title: string, content: string},
+    isOpen: boolean
 }
 
 class StoriesLogic extends React.Component<storyProps, storyVars> {
@@ -31,6 +32,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             viewoneFire: false,
             storyId: '',
             story: {id: '', title: '', content: ''},
+            isOpen: true
         }
 
     }
@@ -193,29 +195,38 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             <Card.Title>{this.state.story.title}</Card.Title>
                             <Card.Text>{this.state.story.content}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event) => this.editStoryModal(event, this.state.story.id)}>Edit Story</Button>
                             <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
                         </Card.Body>
                     </Card>
             );
         };
 
-    viewEditStory = () => {
-        return (
-            <form>
-                <label>Title:</label>
+    editStoryModal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string ) => {
+        const hideModal = () => {
+            this.setState({isOpen: false})
+        }
+    return(
+    <Modal show = {true} >
+      <Modal.Header>Edit Your Story</Modal.Header>
+      <Modal.Body>
+          <Form>
+                <Form.Label>Title:</Form.Label>
                 <input type="text" placeholder="Enter your Story Title"
                     value={this.state.title.value}
                     onChange={this.handleTitle}></input>
 
-
-                <label>Content:</label>
+                <Form.Label>Content:</Form.Label>
                 <input type="text"
                     value={this.state.content.value}
                     onChange={this.handleContent}></input>
-                <button onClick={(event) => { this.createStory(event) }}>Submit Edit</button>
-            </form>
-        );
+          </Form>
+          </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={(event) => hideModal()}>Cancel Edit</Button>
+        <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button></Modal.Footer>
+    </Modal>
+  );
     };
 
     // storySelect () => {
