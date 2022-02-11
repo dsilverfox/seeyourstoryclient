@@ -130,7 +130,6 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //VIEW ONE STORY
     viewoneStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
         event.preventDefault();
-        console.log(id)
         await this.setState({ storyId: id })
         await fetch(`https://seeyourstoryserver.herokuapp.com/story/view/${this.state.storyId}`, {
             method: 'GET',
@@ -142,15 +141,15 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
         })
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 return res.json()
             })
             .then((storyData) => {
                 this.setState({ story: storyData });
-                console.log(storyData)
+                // console.log(storyData)
             });
-        // this.storyMapOne()
-        // this.setState({viewoneFire: true})
+        this.storyMapOne()
+        this.setState({viewoneFire: true})
         console.log('STORY', this.state.story)
     }
 
@@ -184,7 +183,6 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //FUNCTION FOR DISPLAYING ONE STORY
     storyMapOne = () => {
             return (
-                <>
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>{this.state.story.title}</Card.Title>
@@ -195,10 +193,12 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
                         </Card.Body>
                     </Card>
-                </>
             );
         };
-
+        
+    // storySelect () => {
+    // (this.state.viewoneFire && this.storyMapOne()  ? this.storyMapOne() : this.state.viewallFire && this.storyMapper() )
+    // }
  
     render(): React.ReactNode {
 
