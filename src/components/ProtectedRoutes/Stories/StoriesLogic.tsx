@@ -105,6 +105,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 "Authorization": `${this.props.sessionToken}`
             })
         })
+        console.log("Story Deleted")
+        console.log(this.state.stories)
     }
 
     //VIEW ALL STORIES
