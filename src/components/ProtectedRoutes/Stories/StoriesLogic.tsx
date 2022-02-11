@@ -161,6 +161,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     handleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ content: { value: event.target.value } })
     }
+
+    // VIEW FUNCTIONS: Display ALL stories, Display ONE story, Edit story
     //ARRAY MAP FOR DISPLAYING ALL STORIES
     storyMapper = () => {
         return this.state.stories.map((story, index) => {
@@ -195,7 +197,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     </Card>
             );
         };
-        
+
     // storySelect () => {
     // (this.state.viewoneFire && this.storyMapOne()  ? this.storyMapOne() : this.state.viewallFire && this.storyMapper() )
     // }
