@@ -38,7 +38,8 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
 //DELETE A USER
     deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("https://seeyourstoryserver.herokuapp.com/auth/delete/:id", {
+        console.log(this.state.id)
+        await fetch(`https://seeyourstoryserver.herokuapp.com/auth/delete/${this.state.id}`, {
             method: "DELETE",
             headers: new Headers({
                 "Accept": "application/json",
@@ -50,11 +51,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     }
     
     handleID = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ id: { value: event.target.value }}, () => {
-            console.log("ID State", this.state.id)
-        })
-        console.log("Event.Target", event.target.value)
-       
+        this.setState({ id: { value: event.target.value }})
     }
 
     render() {
