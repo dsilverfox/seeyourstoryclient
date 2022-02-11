@@ -64,8 +64,9 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     }
 
     //EDIT STORY
-    editStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    editStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         event.preventDefault();
+        await this.setState({ storyId: id })
         fetch("https://seeyourstoryserver.herokuapp.com/story/update/:storyId", {
             method: "PUT",
             body: JSON.stringify({
@@ -80,7 +81,10 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 "Authorization": `${this.props.sessionToken}`
             }),
         })
-            .then((res) => res.json())
+            .then((res) => {
+                // console.log(res)
+                return res.json()
+            })
             .then((storyData) => {
                 this.setState({ title: this.state.title })
                 this.setState({ content: this.state.content })
@@ -90,9 +94,10 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
     //DELETE A STORY
 
-    deleteStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    deleteStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         event.preventDefault();
-        await fetch("https://seeyourstoryserver.herokuapp.com/story/delete/:storyId", {
+        await this.setState({ storyId: id })
+        await fetch(`https://seeyourstoryserver.herokuapp.com/story/delete/${this.state.storyId}`, {
             method: "DELETE",
             headers: new Headers({
                 "Accept": "application/json",
@@ -178,17 +183,17 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
     //FUNCTION FOR DISPLAYING ONE STORY
     storyMapOne = () => {
-        return this.state.story.map((story, idx) => {
+        return this.state.story.map((story, index) => {
             return (
                 <>
-                    <Card key={idx} style={{ width: '18rem' }}>
+                    <Card key={index} style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>{story.title}</Card.Title>
                             <Card.Subtitle>Story ID: {story.id}</Card.Subtitle>
                             <Card.Text>{story.content}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.editStory(event)}>Edit Story</Button>
-                            <Button variant="primary" onClick={(event) => this.deleteStory(event)}>Delete Story</Button>
+                            <Button variant="primary" onClick={(event) => this.editStory(event, story.id)}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event) => this.deleteStory(event, story.id)}>Delete Story</Button>
                         </Card.Body>
                     </Card>
                 </>
@@ -196,6 +201,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         });
     };
 
+ 
     render(): React.ReactNode {
 
         return (
