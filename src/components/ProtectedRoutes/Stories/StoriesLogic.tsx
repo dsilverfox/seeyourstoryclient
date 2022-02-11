@@ -16,7 +16,7 @@ interface storyVars {
     viewallFire: boolean
     viewoneFire: boolean
     storyId: string
-    story: {id: string, title: string, content: string}[]
+    story: {id: string, title: string, content: string}
 }
 
 class StoriesLogic extends React.Component<storyProps, storyVars> {
@@ -30,7 +30,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             viewallFire: false,
             viewoneFire: false,
             storyId: '',
-            story: [{id: '', title: '', content: ''}],
+            story: {id: '', title: '', content: ''},
         }
 
     }
@@ -142,15 +142,15 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
         })
             .then((res) => {
-                // console.log(res)
+                console.log(res)
                 return res.json()
             })
             .then((storyData) => {
                 this.setState({ story: storyData });
-                // console.log(storyData)
+                console.log(storyData)
             });
-        this.storyMapOne()
-        this.setState({viewoneFire: true})
+        // this.storyMapOne()
+        // this.setState({viewoneFire: true})
         console.log('STORY', this.state.story)
     }
 
@@ -183,23 +183,21 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
     //FUNCTION FOR DISPLAYING ONE STORY
     storyMapOne = () => {
-        return this.state.story.map((story, index) => {
             return (
                 <>
-                    <Card key={index} style={{ width: '18rem' }}>
+                    <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>{story.title}</Card.Title>
-                            <Card.Subtitle>Story ID: {story.id}</Card.Subtitle>
-                            <Card.Text>{story.content}
+                            <Card.Title>{this.state.story.title}</Card.Title>
+                            <Card.Subtitle>Story ID: {this.state.story.id}</Card.Subtitle>
+                            <Card.Text>{this.state.story.content}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.editStory(event, story.id)}>Edit Story</Button>
-                            <Button variant="primary" onClick={(event) => this.deleteStory(event, story.id)}>Delete Story</Button>
+                            <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
                         </Card.Body>
                     </Card>
                 </>
             );
-        });
-    };
+        };
 
  
     render(): React.ReactNode {
