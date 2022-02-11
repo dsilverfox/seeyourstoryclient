@@ -3,8 +3,12 @@ import React from 'react';
 interface AdminProps {
     sessionToken: string | null
 }
+
 interface AdminVars {
-    users: object
+    users: {
+        id: string,
+        username: string,
+    }[]
     id: { value: string }
 }
 
@@ -13,7 +17,10 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
         super(props)
         this.state = {
             id: { value:""},
-            users: {},
+            users: [{
+                id: "",
+                username: "",
+            }],
         }
     }
 
@@ -29,10 +36,11 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
             }),
         })
         .then((res)=> res.json())
-        .then((users) => {
-            console.log(users);
-            this.setState({users:{users}});
+        .then((usersData) => {
+            console.log(usersData);
+            this.setState({users: usersData});
         })
+        this.userList();
     }
 
 //DELETE A USER
@@ -50,6 +58,16 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
         .then(() => this.viewUsers(event));
     }
     
+    userList = () => {
+        return this.state.users.map((user, index) => {
+            return (
+                <ol>
+                    <li key={index}>{user.username} -- {user.id}</li>
+                </ol>
+            )
+        })
+    };
+
     handleID = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ id: { value: event.target.value }})
     }
@@ -78,6 +96,8 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
                     }
                     }
                 > Delete </button>
+
+                <>{this.userList()}</>
                 
             </div>
         )
