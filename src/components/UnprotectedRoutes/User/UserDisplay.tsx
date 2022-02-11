@@ -7,11 +7,8 @@ interface UserDisplayProps {
 }
 
 class UsersDisplay extends React.Component<UserDisplayProps, {}> {
-    constructor(props: UserDisplayProps) {
-        super(props)
-    }
 
-    render() {
+    render(): React.ReactNode {
         console.log("UserName at User Display", this.props.username)
         console.log("UserID at User Display", this.props.userId)
         return (

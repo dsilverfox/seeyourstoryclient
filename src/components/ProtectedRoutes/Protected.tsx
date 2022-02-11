@@ -11,9 +11,7 @@ interface protectedProps {
 }
 
 class Protected extends React.Component<protectedProps, {}> {
-    constructor(props: protectedProps) {
-        super(props)
-    }
+
     adminUser = () => {
         console.log(this.props.hasAdmin)
         return (this.props.hasAdmin === true ? <AdminLogic sessionToken={this.props.sessionToken} /> : null)

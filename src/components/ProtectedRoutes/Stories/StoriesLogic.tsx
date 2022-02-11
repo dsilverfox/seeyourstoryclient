@@ -14,7 +14,9 @@ interface storyVars {
         content: string
     }[]
     viewallFire: boolean
+    viewoneFire: boolean
     storyId: string
+    story: {id: string, title: string, content: string}[]
 }
 
 class StoriesLogic extends React.Component<storyProps, storyVars> {
@@ -26,7 +28,9 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             content: { value: '' },
             stories: [{ id: '', title: '', content: '' }],
             viewallFire: false,
+            viewoneFire: false,
             storyId: '',
+            story: [{id: '', title: '', content: ''}],
         }
 
     }
@@ -80,7 +84,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .then((storyData) => {
                 this.setState({ title: this.state.title })
                 this.setState({ content: this.state.content })
-                this.setState({ storyId: storyData.id})
+                this.setState({ storyId: storyData.id })
             })
     }
 
@@ -113,30 +117,36 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .then((storyData) => {
                 this.setState({ stories: storyData });
                 console.log(this.state.stories);
-                console.log(this.state.stories[1].id)
             });
-            this.storyMapper();
-        this.setState({viewallFire: true});
+        this.storyMapper();
+        this.setState({ viewallFire: true });
     }
 
     //VIEW ONE STORY
-    viewoneStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    viewoneStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/story/view/:storyId", {
+        console.log(id)
+        await this.setState({ storyId: id })
+        await fetch(`https://seeyourstoryserver.herokuapp.com/story/view/${this.state.storyId}`, {
             method: 'GET',
             headers: new Headers({
                 "Accept": "application/json",
                 'Content-Type': 'application/json',
                 'Authorization': `${this.props.sessionToken}`
             }),
-        })
 
-            .then((res) => res.json())
+        })
+            .then((res) => {
+                // console.log(res)
+                return res.json()
+            })
             .then((storyData) => {
-                this.setState({ stories: storyData });
-                this.setState({ storyId: storyData.id })
-                console.log(this.state.storyId)
+                this.setState({ story: storyData });
+                // console.log(storyData)
             });
+        this.storyMapOne()
+        this.setState({viewoneFire: true})
+        console.log('STORY', this.state.story)
     }
 
     //INPUT BASED SETSTATE
@@ -158,7 +168,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             <Card.Subtitle>Story ID: {story.id}</Card.Subtitle>
                             <Card.Text>{story.content}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.viewoneStory(event)}>Select Story</Button>
+                            <Button variant="primary" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
                         </Card.Body>
                     </Card>
                 </>
@@ -167,21 +177,24 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     };
 
     //FUNCTION FOR DISPLAYING ONE STORY
-    displayOne = () => {
-        return (
-            <Card style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title>{this.state.stories.title}</Card.Title>
-                    <Card.Subtitle>Story ID: {this.state.stories.id}</Card.Subtitle>
-                    <Card.Text>{this.state.stories.content}
-                    </Card.Text>
-                    <Button variant="primary" onClick={(event) => this.editStory(event)}>Edit Story</Button>
-                    <Button variant="primary" onClick={(event) => this.deleteStory}>Delete Story</Button>
-                </Card.Body>
-            </Card>
-        )
-    }
-
+    storyMapOne = () => {
+        return this.state.story.map((story, idx) => {
+            return (
+                <>
+                    <Card key={idx} style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>{story.title}</Card.Title>
+                            <Card.Subtitle>Story ID: {story.id}</Card.Subtitle>
+                            <Card.Text>{story.content}
+                            </Card.Text>
+                            <Button variant="primary" onClick={(event) => this.editStory(event)}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event) => this.deleteStory(event)}>Delete Story</Button>
+                        </Card.Body>
+                    </Card>
+                </>
+            );
+        });
+    };
 
     render(): React.ReactNode {
 
@@ -205,6 +218,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
                 <div>
                     <>{this.state.viewallFire && this.storyMapper()}</>
+                    <>{this.state.viewoneFire && this.storyMapOne()}</>
                 </div>
             </div>
         )
