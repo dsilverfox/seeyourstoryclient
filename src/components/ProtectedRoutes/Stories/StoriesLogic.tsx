@@ -61,6 +61,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .catch(error => {
                 console.log(error)
             });
+            this.viewallStories(event);
     }
 
     //EDIT STORY
@@ -70,7 +71,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         fetch(`https://seeyourstoryserver.herokuapp.com/story/update/${this.state.storyId}`, {
             method: "PUT",
             body: JSON.stringify({
-                stories: {
+                editStories: {
                     title: this.state.title.value,
                     content: this.state.content.value,
                 }
@@ -107,6 +108,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         })
         console.log("Story Deleted")
         console.log(this.state.stories)
+        this.viewallStories(event);
     }
 
     //VIEW ALL STORIES
@@ -173,7 +175,6 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     <Card key={index} style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>{story.title}</Card.Title>
-                            <Card.Subtitle>Story ID: {story.id}</Card.Subtitle>
                             <Card.Text>{story.content}
                             </Card.Text>
                             <Button variant="primary" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
@@ -190,7 +191,6 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>{this.state.story.title}</Card.Title>
-                            <Card.Subtitle>Story ID: {this.state.story.id}</Card.Subtitle>
                             <Card.Text>{this.state.story.content}
                             </Card.Text>
                             <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Edit Story</Button>
@@ -199,6 +199,24 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     </Card>
             );
         };
+
+    viewEditStory = () => {
+        return (
+            <form>
+                <label>Title:</label>
+                <input type="text" placeholder="Enter your Story Title"
+                    value={this.state.title.value}
+                    onChange={this.handleTitle}></input>
+
+
+                <label>Content:</label>
+                <input type="text"
+                    value={this.state.content.value}
+                    onChange={this.handleContent}></input>
+                <button onClick={(event) => { this.createStory(event) }}>Submit Edit</button>
+            </form>
+        );
+    };
 
     // storySelect () => {
     // (this.state.viewoneFire && this.storyMapOne()  ? this.storyMapOne() : this.state.viewallFire && this.storyMapper() )
