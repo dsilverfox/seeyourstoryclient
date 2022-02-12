@@ -138,17 +138,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
             })
     }
 
-//DELETE USER ACCOUNT
-    deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
-        await this.setState({userId: id})
-        await fetch(`${APIURL}/auth/delete/${this.state.userId}`, {
-            method: "DELETE",
-            headers: new Headers({
-                "Content-Type": "application/json",
-                "Authorization": `${this.props.sessionToken}`
-            })
-        })
-    }
+
 
     handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({username: {value: event.target.value}})
@@ -181,16 +171,6 @@ class UserLogic extends React.Component<userProps, UserVars> {
                     <button onClick={(event) => { this.loginUsers(event) }}>Login</button>
                     
                     <button onClick={(event) => { this.registerUsers(event) }}>Register</button>
-                    
-                    <br/>
-                   
-                    <label>Delete Account:</label>
-                    <input type="string"
-                        value={this.state.userId}
-                        onChange={this.handleUserId}></input>
-                
-                     <button onClick={(event) => {const confirmBox = window.confirm("Do you really want to delete your account?This cannot be undone and will erase ALL content PERMANENTLY and INSTANTLY. WE WILL NOT BE ABLE TO RECOVER THIS INFORMATION") 
-                     if(confirmBox ===true){this.deleteUserAccount((event), this.state.userId) }}}> Delete Account </button> 
                 </form>
 
 

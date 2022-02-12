@@ -66,7 +66,8 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
         return this.state.users.map((user, index) => {
             return (
                 <ol>
-                    <li className="Userlist" key={index}>{index+1}: {user.username} -- {user.id}<button onClick={(event)=> this.deleteUsers(event, this.state.id)}>Delete User</button></li>
+                    <li className="Userlist" key={index}>{index+1}: {user.username} -- {user.id}</li>
+                    <button onClick={(event) => this.deleteUsers(event, this.state.id)}>Delete User</button>
                 </ol>
             )
         })

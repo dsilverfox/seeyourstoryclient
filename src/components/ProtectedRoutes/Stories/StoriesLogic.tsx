@@ -229,7 +229,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
           </Form>
           </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={(event) => hideModal()}>Cancel Edit</Button>
+        <Button variant="primary" onClick={(event) => {hideModal()}}>Cancel Edit</Button>
         <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
         </Modal.Footer>
     </Modal>
