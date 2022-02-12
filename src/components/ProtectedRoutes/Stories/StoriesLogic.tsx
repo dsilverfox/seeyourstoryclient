@@ -39,7 +39,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     }
 
     createStory = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.preventDefault();
+        // event.preventDefault();
         console.log("story title:", this.state.title.value)
         console.log("story content:", this.state.content.value)
         console.log("Session token on Story Create", this.props.sessionToken)
@@ -65,6 +65,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 console.log(error)
             });
             this.viewallStories(event);
+            //This does not fire.
     }
 
     //EDIT STORY
