@@ -48,8 +48,9 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
 
 //DELETE A USER
     deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.preventDefault();
+        // event.preventDefault();
         console.log(this.state.id)
+        await this.setState({id: this.state.id})
         await fetch(`${APIURL}/auth/delete/${this.state.id}`, {
             method: "DELETE",
             headers: new Headers({
