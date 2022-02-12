@@ -100,7 +100,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //DELETE A STORY
 
     deleteStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
-        event.preventDefault();
+        // event.preventDefault();
         await this.setState({ storyId: id })
         await fetch(`${APIURL}/story/delete/${this.state.storyId}`, {
             method: "DELETE",
