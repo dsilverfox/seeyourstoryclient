@@ -78,11 +78,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
         })
             .then((res) => res.json())
             .then((CharacterData) => {
-                this.setState({ firstname: this.state.firstname })
-                this.setState({ lastname: this.state.lastname })
-                this.setState({ gender: this.state.gender })
-                this.setState({ age: this.state.age })
-                this.setState({ dob: this.state.dob })
+                console.log(CharacterData)
             })
     }
 

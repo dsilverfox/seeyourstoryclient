@@ -256,6 +256,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 <div>
                     <>{this.state.viewallFire && this.storyMapper()}</>
                     <>{this.state.viewoneFire && this.storyMapOne()}</>
+                    <>{this.editStoryModal(event, this.state.story.id)}</>
                 </div>
             </div>
         )
