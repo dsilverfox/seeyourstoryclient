@@ -50,12 +50,12 @@ class App extends React.Component<{}, tokenState> {
   } 
 
   setUsername =(sun: string) => {
-    localStorage.setItem('localName', sun)
+    // localStorage.setItem('localName', sun)
     this.setState({username: sun})
   }
 
   setUserId =(sid: string) => {
-    localStorage.setItem('localUserId', sid)
+    // localStorage.setItem('localUserId', sid)
     this.setState({userId: sid})
   }
   
