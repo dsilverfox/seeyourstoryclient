@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Modal, Form} from 'react-bootstrap';
+import { Card, Button, Modal, Form, Container} from 'react-bootstrap';
 import APIURL from '../../../helpers/environment';
 
 interface storyProps {
@@ -176,6 +176,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         return this.state.stories.map((story, index) => {
             return (
                 <>
+                  <Container className="Allstories">
                     <Card key={index} style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>{story.title}</Card.Title>
@@ -184,6 +185,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             <Button variant="primary" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
                         </Card.Body>
                     </Card>
+                    </Container>
                 </>
             );
         });

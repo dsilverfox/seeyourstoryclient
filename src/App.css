@@ -41,3 +41,7 @@
 .Userlist {
   list-style: none;
 }
+
+.Allstories {
+  display: flex
+}
