@@ -1,7 +1,7 @@
 import React from 'react';
 import StoriesLogic from './Stories/StoriesLogic'
 import AdminLogic from './Admin/AdminLogic'
-// import UserDisplay from '../UnprotectedRoutes/User/UserDisplay'
+import UserDisplay from '../UnprotectedRoutes/User/UserDisplay'
 
 interface protectedProps {
     sessionToken: string | null
@@ -20,7 +20,7 @@ class Protected extends React.Component<protectedProps, {}> {
         return (
             <div>
                 {this.adminUser()}
-                {/* <UserDisplay username={this.props.username} userId={this.props.userId} /> */}
+                <UserDisplay sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />
                 <StoriesLogic sessionToken={this.props.sessionToken} />
 
             </div>
