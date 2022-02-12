@@ -33,7 +33,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             viewoneFire: false,
             storyId: '',
             story: {id: '', title: '', content: ''},
-            isOpen: true
+            isOpen: false
         }
 
     }
@@ -205,12 +205,13 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         };
 
     editStoryModal = () => {
+            this.setState({isOpen: true})
         const hideModal = () => {
             this.setState({isOpen: false})
             console.log(this.state.storyId)
         }
     return(
-    <Modal show = {true} >
+    <Modal show = {this.state.isOpen} >
       <Modal.Header>Edit Your Story</Modal.Header>
       <Modal.Body>
           <Form>
