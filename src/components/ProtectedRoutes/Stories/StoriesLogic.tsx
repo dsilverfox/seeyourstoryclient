@@ -196,16 +196,17 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             <Card.Title>{this.state.story.title}</Card.Title>
                             <Card.Text>{this.state.story.content}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.editStoryModal(event, this.state.story.id)}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event) => this.editStoryModal()}>Edit Story</Button>
                             <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
                         </Card.Body>
                     </Card>
             );
         };
 
-    editStoryModal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string ) => {
+    editStoryModal = () => {
         const hideModal = () => {
             this.setState({isOpen: false})
+            console.log(this.state.storyId)
         }
     return(
     <Modal show = {true} >
@@ -256,7 +257,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 <div>
                     <>{this.state.viewallFire && this.storyMapper()}</>
                     <>{this.state.viewoneFire && this.storyMapOne()}</>
-                    <>{this.editStoryModal(event, this.state.story.id)}</>
+            
                 </div>
             </div>
         )
