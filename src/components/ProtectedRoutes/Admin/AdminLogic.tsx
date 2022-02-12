@@ -9,7 +9,7 @@ interface AdminVars {
         id: string,
         username: string,
     }[]
-    id: { value: string }
+    id: string,
     userListFire: boolean
 }
 
@@ -17,7 +17,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     constructor(props: AdminProps){
         super(props)
         this.state = {
-            id: { value:""},
+            id: "",
             users: [{
                 id: "",
                 username: "",
@@ -47,7 +47,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     }
 
 //DELETE A USER
-    deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         // event.preventDefault();
         console.log(this.state.id)
         await this.setState({id: this.state.id})
@@ -73,7 +73,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     };
 
     handleID = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ id: { value: event.target.value }})
+        this.setState({ id: event.target.value})
     }
 
     render() {
@@ -86,7 +86,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
 
                 <label>User ID:</label>
                 <input type="text"
-                    value={this.state.id.value}
+                    value={this.state.id}
                     onChange={this.handleID}></input>
 
                 <button
@@ -97,7 +97,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
                             window.confirm(
                                 "Do you really want to delete this User? This action cannot be undone!"
                             )
-                        if (confirmBox === true) {this.deleteUsers(event)}
+                        if (confirmBox === true) {this.deleteUsers((event), this.state.id)}
                     }
                     }
                 > Delete </button>
