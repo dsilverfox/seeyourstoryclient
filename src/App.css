@@ -37,3 +37,7 @@
 .UserInput button {
   margin: 1rem;
 }
+
+.Userlist {
+  list-style: none;
+}
