@@ -199,7 +199,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             <Card.Title>{this.state.story.title}</Card.Title>
                             <Card.Text>{this.state.story.content}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.editStoryModal()}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event) => this.editStoryModal}>Edit Story</Button>
                             <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
                         </Card.Body>
                     </Card>
