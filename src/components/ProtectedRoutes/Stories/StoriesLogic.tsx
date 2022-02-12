@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Button, Modal, Form} from 'react-bootstrap'
+import { Card, Button, Modal, Form} from 'react-bootstrap';
+import APIURL from '../../../helpers/environment';
 
 interface storyProps {
     sessionToken: string | null
@@ -42,7 +43,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         console.log("story title:", this.state.title.value)
         console.log("story content:", this.state.content.value)
         console.log("Session token on Story Create", this.props.sessionToken)
-        fetch("https://seeyourstoryserver.herokuapp.com/story/create", {
+        fetch(`${APIURL}/story/create`, {
             method: "POST",
             body: JSON.stringify({
                 stories: {
@@ -70,7 +71,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     editStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         event.preventDefault();
         await this.setState({ storyId: id })
-        fetch(`https://seeyourstoryserver.herokuapp.com/story/update/${this.state.storyId}`, {
+        fetch(`${APIURL}/story/update/${this.state.storyId}`, {
             method: "PUT",
             body: JSON.stringify({
                 editStories: {
@@ -100,7 +101,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     deleteStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         event.preventDefault();
         await this.setState({ storyId: id })
-        await fetch(`https://seeyourstoryserver.herokuapp.com/story/delete/${this.state.storyId}`, {
+        await fetch(`${APIURL}/story/delete/${this.state.storyId}`, {
             method: "DELETE",
             headers: new Headers({
                 "Accept": "application/json",
@@ -116,7 +117,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //VIEW ALL STORIES
     viewallStories = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/story/view", {
+        fetch(`${ APIURL }/story/view`, {
             method: 'GET',
             headers: new Headers({
                 "Accept": "application/json",
@@ -137,7 +138,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     viewoneStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
         event.preventDefault();
         await this.setState({ storyId: id })
-        await fetch(`https://seeyourstoryserver.herokuapp.com/story/view/${this.state.storyId}`, {
+        await fetch(`${APIURL}/story/view/${this.state.storyId}`, {
             method: 'GET',
             headers: new Headers({
                 "Accept": "application/json",

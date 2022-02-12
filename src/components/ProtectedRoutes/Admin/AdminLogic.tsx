@@ -1,5 +1,5 @@
 import React from 'react';
-
+import APIURL from '../../../helpers/environment'
 interface AdminProps {
     sessionToken: string | null
 }
@@ -29,7 +29,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
 //VIEW ALL USERS
     viewUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("https://seeyourstoryserver.herokuapp.com/auth/userinfo", {
+        await fetch(`${ APIURL }/auth/userinfo`, {
             method: "GET",
             headers: new Headers({
                 "Accept": "application/json",
@@ -50,7 +50,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         console.log(this.state.id)
-        await fetch(`https://seeyourstoryserver.herokuapp.com/auth/delete/${this.state.id}`, {
+        await fetch(`${APIURL}/auth/delete/${this.state.id}`, {
             method: "DELETE",
             headers: new Headers({
                 "Accept": "application/json",

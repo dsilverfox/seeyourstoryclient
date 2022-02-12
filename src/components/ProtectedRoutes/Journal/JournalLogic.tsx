@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../../helpers/environment';
 
 interface journalProps{
     sessionToken: string
@@ -21,7 +22,7 @@ class JournalLogic extends React.Component<journalProps, journalVars> {
 
     createjournal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/journal/create", {
+        fetch(`${ APIURL }/journal/create`, {
             method: "POST",
             body: JSON.stringify({
                 journal: {
@@ -45,7 +46,7 @@ class JournalLogic extends React.Component<journalProps, journalVars> {
     //EDIT journal
     editjournal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/journal/update/:journalId", {
+        fetch(`${ APIURL }/journal/update/:journalId`, {
             method: "PUT",
             body: JSON.stringify({
                 journal: {
@@ -82,7 +83,7 @@ class JournalLogic extends React.Component<journalProps, journalVars> {
     //VIEW ONE Journal
     viewonejournal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/journal/view/:journalId", {
+        fetch(`${APIURL}/journal/view/:journalId`, {
             method: 'GET',
             headers: new Headers({
                 "Accept": "application/json",
