@@ -1,5 +1,5 @@
 import React from 'react';
-
+import APIURL from '../../../helpers/environment'
 interface characterProps {
     sessionToken: string | null
 }
@@ -29,7 +29,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
     createCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/Character/create", {
+        fetch(`${APIURL}/Character/create`, {
             method: "POST",
             body: JSON.stringify({
                 Character: {
@@ -59,7 +59,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     //EDIT Character
     editCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/Character/update/:CharacterId", {
+        fetch(`${APIURL}/Character/update/:CharacterId`, {
             method: "PUT",
             body: JSON.stringify({
                 Character: {
@@ -90,7 +90,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
     deleteCharacter = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("https://seeyourstoryserver.herokuapp.com/Character/delete/:CharacterId", {
+        await fetch(`${APIURL}/Character/delete/:CharacterId`, {
             method: "DELETE",
             headers: new Headers({
        "Accept": "application/json",
@@ -103,7 +103,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     //VIEW ALL Characters
     viewallCharacters = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/Character/view", {
+        fetch(`${APIURL}/Character/view`, {
             method: 'GET',
             headers: new Headers({
        "Accept": "application/json",
@@ -121,7 +121,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     //VIEW ALL Characters
     viewoneCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/Character/view/:characterId", {
+        fetch(`${APIURL}/Character/view/:characterId`, {
             method: 'GET',
             headers: new Headers({
        "Accept": "application/json",

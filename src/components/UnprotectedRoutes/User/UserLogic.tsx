@@ -1,4 +1,5 @@
 import React from "react";
+import APIURL from "../../../helpers/environment";
 
 // import {Alert} from 'react-bootstrap';
 interface userProps {
@@ -74,7 +75,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
     registerUsers = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         console.log("Username State", this.state.username.value, "PASSWORD STATE", this.state.password.value)
         event.preventDefault();
-        fetch("https://seeyourstoryserver.herokuapp.com/auth/signup", {
+    fetch(`${APIURL}/auth/signup`,{
             method: "POST",
             body: JSON.stringify({ user: { 
                 username: this.state.username.value,
@@ -107,7 +108,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
     loginUsers = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         console.log("Username State", this.state.username.value, "PASSWORD STATE", this.state.password.value)
-        fetch("https://seeyourstoryserver.herokuapp.com/auth/login", {
+        fetch(`${APIURL}/auth/login`, {
             method: "POST",
             body: JSON.stringify({
                 user: {
@@ -140,7 +141,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
 //DELETE USER ACCOUNT
     deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch("https://seeyourstoryserver.herokuapp.com/auth/delete/:id", {
+        await fetch(`${APIURL}/auth/delete/:id`, {
             method: "DELETE",
             headers: new Headers({
                 "Content-Type": "application/json",
