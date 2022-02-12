@@ -205,7 +205,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     </Card>
             );
         };
-
+        //FUNCTION FOR EDIT STORY MODAL
     editStoryModal = () => {
             this.setState({isOpen: true})
         const hideModal = () => {

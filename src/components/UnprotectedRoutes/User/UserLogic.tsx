@@ -5,8 +5,8 @@ import APIURL from "../../../helpers/environment";
 interface userProps {
     updateToken: (newToken: string) => void 
     setAdmin: (b: boolean) => void
-    setUsername: (sun: string) => void
-    setUserId: (sid: string) => void
+    setUsername: (s: string) => void
+    setUserId: (i: string) => void
     sessionToken: string | null
 }
 

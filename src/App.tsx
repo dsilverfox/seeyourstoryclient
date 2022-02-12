@@ -49,14 +49,14 @@ class App extends React.Component<{}, tokenState> {
     this.setState({hasAdmin: b})
   } 
 
-  setUsername =(sun: string) => {
+  setUsername =(s: string) => {
     // localStorage.setItem('localName', sun)
-    this.setState({username: sun})
+    this.setState({username: s})
   }
 
-  setUserId =(sid: string) => {
+  setUserId =(i: string) => {
     // localStorage.setItem('localUserId', sid)
-    this.setState({userId: sid})
+    this.setState({userId: i})
   }
   
 //If the user has a valid token show the protected views, if they do not show unprotected.
