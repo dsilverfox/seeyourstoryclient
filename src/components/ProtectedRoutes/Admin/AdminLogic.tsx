@@ -50,7 +50,6 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         // event.preventDefault();
         console.log(this.state.id)
-        await this.setState({id: this.state.id})
         await fetch(`${APIURL}/auth/delete/${this.state.id}`, {
             method: "DELETE",
             headers: new Headers({
@@ -64,6 +63,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     
     userList = () => {
         return this.state.users.map((user, index) => {
+            console.log(user)
             return (
                 <ol>
                     <li className="Userlist" key={index}>{index+1}: {user.username} -- {user.id}</li>
