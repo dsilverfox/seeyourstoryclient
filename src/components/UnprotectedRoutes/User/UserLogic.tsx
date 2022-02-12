@@ -140,9 +140,8 @@ class UserLogic extends React.Component<userProps, UserVars> {
 
 //DELETE USER ACCOUNT
     deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
-        event.preventDefault();
         await this.setState({userId: id})
-        await fetch(`${APIURL}/auth/delete/:id`, {
+        await fetch(`${APIURL}/auth/delete/${this.state.userId}`, {
             method: "DELETE",
             headers: new Headers({
                 "Content-Type": "application/json",
@@ -157,6 +156,10 @@ class UserLogic extends React.Component<userProps, UserVars> {
     
     handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({password: {value: event.target.value} })
+    }
+
+    handleUserId = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({userId: event.target.value})
     }
    
     render() {
@@ -176,9 +179,18 @@ class UserLogic extends React.Component<userProps, UserVars> {
                     onChange={this.handlePassword}></input>
 
                     <button onClick={(event) => { this.loginUsers(event) }}>Login</button>
+                    
                     <button onClick={(event) => { this.registerUsers(event) }}>Register</button>
-
-                    {/* <button onClick={(event) => { this.deleteUserAccount(event) }}>Delete Account</button> */}
+                    
+                    <br/>
+                   
+                    <label>Delete Account:</label>
+                    <input type="string"
+                        value={this.state.userId}
+                        onChange={this.handleUserId}></input>
+                
+                     <button onClick={(event) => {const confirmBox = window.confirm("Do you really want to delete your account?This cannot be undone and will erase ALL content PERMANENTLY and INSTANTLY. WE WILL NOT BE ABLE TO RECOVER THIS INFORMATION") 
+                     if(confirmBox ===true){this.deleteUserAccount((event), this.state.userId) }}}> Delete Account </button> 
                 </form>
 
 
