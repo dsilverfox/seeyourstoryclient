@@ -11,7 +11,6 @@ interface UserDisplayProps {
 class UsersDisplay extends React.Component<UserDisplayProps, {}> {
     //DELETE USER ACCOUNT
     deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
-        await this.setState({ userId: id })
         await fetch(`${APIURL}/auth/delete/${this.props.userId}`, {
             method: "DELETE",
             headers: new Headers({

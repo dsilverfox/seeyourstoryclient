@@ -108,6 +108,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
     loginUsers = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         console.log("Username State", this.state.username.value, "PASSWORD STATE", this.state.password.value)
+        console.log()
         fetch(`${APIURL}/auth/login`, {
             method: "POST",
             body: JSON.stringify({
@@ -131,7 +132,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
                 this.props.setAdmin(data.user.hasAdmin)
                 this.props.updateToken(data.sessionToken)
                 this.props.setUsername(data.user.username)
-                this.props.setUserId(data.user.id)
+                // this.props.setUserId(data.user.id)
             })
 
             .catch(error => {
