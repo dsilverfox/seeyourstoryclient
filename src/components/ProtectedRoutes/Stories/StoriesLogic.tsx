@@ -234,7 +234,6 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     // }
  
     render(): React.ReactNode {
-
         return (
             <div>
                 {/* Create a story. */}
