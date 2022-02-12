@@ -139,8 +139,9 @@ class UserLogic extends React.Component<userProps, UserVars> {
     }
 
 //DELETE USER ACCOUNT
-    deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         event.preventDefault();
+        await this.setState({userId: id})
         await fetch(`${APIURL}/auth/delete/:id`, {
             method: "DELETE",
             headers: new Headers({
@@ -176,6 +177,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
 
                     <button onClick={(event) => { this.loginUsers(event) }}>Login</button>
                     <button onClick={(event) => { this.registerUsers(event) }}>Register</button>
+
                     {/* <button onClick={(event) => { this.deleteUserAccount(event) }}>Delete Account</button> */}
                 </form>
 
