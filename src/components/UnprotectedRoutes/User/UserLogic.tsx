@@ -128,11 +128,11 @@ class UserLogic extends React.Component<userProps, UserVars> {
                 // console.log("Data for UserId", data.user.id)
                 // console.log("Data for Username", data.user.username)
                 // console.log("Data for hasAdmin?", data.user.hasAdmin)
-                console.log(data.user)
-                this.props.setAdmin(data.user.hasAdmin)
+                console.log(data)
                 this.props.updateToken(data.sessionToken)
                 this.props.setUsername(data.user.username)
                 this.props.setUserId(data.user.id)
+                this.props.setAdmin(data.user.hasAdmin)
             })
 
             .catch(error => {
