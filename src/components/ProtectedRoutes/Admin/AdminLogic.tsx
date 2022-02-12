@@ -66,7 +66,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
         return this.state.users.map((user, index) => {
             return (
                 <ol>
-                    <li key={index}>{user.username} -- {user.id}</li>
+                    <li key={index}>{index}{user.username} -- {user.id}</li>
                 </ol>
             )
         })
