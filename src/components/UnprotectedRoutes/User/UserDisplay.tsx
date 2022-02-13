@@ -47,7 +47,7 @@ class UsersDisplay extends React.Component<UserDisplayProps, DisplayVars> {
                         </Card.Text>
                         <Button variant="danger" onClick={(event) => {
                             const confirmBox = window.confirm("Do you really want to delete your account?This cannot be undone and will erase ALL content PERMANENTLY and INSTANTLY. WE WILL NOT BE ABLE TO RECOVER THIS INFORMATION")
-                            if (confirmBox === true) { this.deleteUserAccount((event), this.props.userId) }
+                            if (confirmBox === true) { this.deleteUserAccount((event), this.state.userId) }
                         }}> Delete Account </Button> 
                     </Card.Body>
                 </Card>
