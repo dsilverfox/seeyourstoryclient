@@ -177,7 +177,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             return (
                 <>
                   <Container className="Allstories">
-                    <Card key={index} style={{ width: '18rem' }}>
+                    <Card key={index} style={{ width: '15rem' }}>
                         <Card.Body>
                             <Card.Title>{story.title}</Card.Title>
                             <Card.Text>{story.content}
@@ -194,7 +194,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //FUNCTION FOR DISPLAYING ONE STORY
     storyMapOne = () => {
             return (
-                    <Card style={{ width: '18rem' }}>
+                    <Card className="viewOne" style={{ width: '15rem' }}>
                         <Card.Body>
                             <Card.Title>{this.state.story.title}</Card.Title>
                             <Card.Text>{this.state.story.content}
@@ -260,7 +260,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
 
                 <div>
-                    <>{this.state.viewallFire && this.storyMapper()}</>
+                    <><div className='cardGroup'>{this.state.viewallFire && this.storyMapper()}</div></>
                     <>{this.state.viewoneFire && this.storyMapOne()}</>
             
                 </div>

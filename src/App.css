@@ -42,8 +42,23 @@
   list-style: none;
 }
 
+.cardGroup {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+
 .Allstories {
-  display: flex;
-  flex-wrap:wrap;
-  flex-direction: row;
+    max-width: 15rem;
+    margin: 5px;
+    box-shadow: 5px 5px 5px gray;
+    flex: 0 1 24%;
+}
+
+.viewOne {
+    max-width: 20rem;
+    margin: 5px;
+    box-shadow: 5px 5px 5px gray;
+    flex: 0 1 24%;
+    justify-content: center;
 }
