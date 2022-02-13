@@ -8,13 +8,24 @@ interface UserDisplayProps {
     userId: string
 }
 
-class UsersDisplay extends React.Component<UserDisplayProps, {}> {
+interface DisplayVars {
+    userId:string
+}
+
+class UsersDisplay extends React.Component<UserDisplayProps, DisplayVars> {
+    constructor(props: UserDisplayProps){
+        super(props) 
+            this.state = {
+                userId: "",
+            }
+    }
     //DELETE USER ACCOUNT
     deleteUserAccount = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
         await this.setState({userId: id})
-        await fetch(`${APIURL}/auth/delete/${this.props.userId}`, {
+        await fetch(`${APIURL}/auth/delete/${this.state.userId}`, {
             method: "DELETE",
             headers: new Headers({
+                "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `${this.props.sessionToken}`
             })
