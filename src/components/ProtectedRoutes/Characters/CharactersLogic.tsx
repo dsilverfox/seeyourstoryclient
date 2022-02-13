@@ -2,13 +2,14 @@ import React from 'react';
 import APIURL from '../../../helpers/environment'
 interface characterProps {
     sessionToken: string | null
+    storyId: string
 }
 
 interface characterVars {
-    firstname: { value: string },
-    lastname: { value: string },
-    gender: { value: string },
-    age: { value: string },
+    firstname: string,
+    lastname: string,
+    gender: string ,
+    age: string,
     dob: string,
     characters: {}
 }
@@ -18,10 +19,10 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
         super(props)
 
         this.state = {
-            firstname: { value: '' },
-            lastname: { value: '' },
-            gender: { value: '' },
-            age: { value: '' },
+            firstname: '',
+            lastname: '',
+            gender: '',
+            age: '',
             dob: "",
             characters: {}
         }
@@ -29,10 +30,11 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
     createCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch(`${APIURL}/Character/create`, {
+        console.log(this.props.storyId)
+        fetch(`${APIURL}/characters/create/${this.props.storyId}`, {
             method: "POST",
             body: JSON.stringify({
-                Character: {
+                characters: {
                     firstname: this.state.firstname,
                     lastname: this.state.lastname,
                     gender: this.state.gender,
@@ -48,18 +50,15 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
         })
             .then((res) => res.json())
             .then((CharacterData) => {
-                this.setState({ firstname: this.state.firstname })
-                this.setState({ lastname: this.state.lastname })
-                this.setState({ gender: this.state.gender })
-                this.setState({ age: this.state.age })
-                this.setState({ dob: this.state.dob })
+                console.log(CharacterData)
             })
+            
     }
 
     //EDIT Character
     editCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch(`${APIURL}/Character/update/:CharacterId`, {
+        fetch(`${APIURL}/characters/update/:storyId`, {
             method: "PUT",
             body: JSON.stringify({
                 Character: {
@@ -86,7 +85,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
     deleteCharacter = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        await fetch(`${APIURL}/Character/delete/:CharacterId`, {
+        await fetch(`${APIURL}/characters/delete/:storyId`, {
             method: "DELETE",
             headers: new Headers({
                 "Accept": "application/json",
@@ -99,7 +98,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     //VIEW ALL Characters
     viewallCharacters = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch(`${APIURL}/Character/view`, {
+        fetch(`${APIURL}/characters/view`, {
             method: 'GET',
             headers: new Headers({
                 "Accept": "application/json",
@@ -117,7 +116,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     //VIEW One Character
     viewoneCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch(`${APIURL}/Character/view/:characterId`, {
+        fetch(`${APIURL}/characters/view/:storyId`, {
             method: 'GET',
             headers: new Headers({
                 "Accept": "application/json",
@@ -132,19 +131,19 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
             });
     }
     handleFirstname = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ firstname: { value: event.target.value } })
+        this.setState({ firstname: event.target.value })
     }
 
     handleLastname = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ lastname: { value: event.target.value } })
+        this.setState({ lastname: event.target.value })
     }
 
     handleGender = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ gender: { value: event.target.value } })
+        this.setState({ gender: event.target.value  })
     }
 
     handleAge = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ age: { value: event.target.value } })
+        this.setState({ age:  event.target.value  })
     }
 
     handleDOB = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -156,23 +155,23 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                 <form>
                     <label>First Name:</label>
                     <input type="text"
-                        value={this.state.firstname.value}
+                        value={this.state.firstname}
                         onChange={this.handleFirstname}></input>
 
 
                     <label>Last Name:</label>
                     <input type="text"
-                        value={this.state.lastname.value}
+                        value={this.state.lastname}
                         onChange={this.handleLastname}></input>
 
                     <label>Gender:</label>
                     <input type="text"
-                        value={this.state.gender.value}
+                        value={this.state.gender}
                         onChange={this.handleGender}></input>
 
                     <label>Age:</label>
                     <input type="text"
-                        value={this.state.age.value}
+                        value={this.state.age}
                         onChange={this.handleAge}></input>
 
                     <label>Date of Birth:</label>

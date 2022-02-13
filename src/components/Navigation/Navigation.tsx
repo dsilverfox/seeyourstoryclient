@@ -18,7 +18,8 @@ interface passProps {
     sessionToken: string | null
     hasAdmin: boolean
     username: string,
-    userId: string
+    userId: string,
+    storyId: string
 }
 
 class Protected extends React.Component<passProps, {}> {
@@ -32,14 +33,19 @@ class Protected extends React.Component<passProps, {}> {
                         <Route path='/' element={<App />} />
                         <Route path='/users' element={<UsersDisplay clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />} />
                         <Route path='/stories' element={<StoriesLogic sessionToken={this.props.sessionToken} />} />
-                        <Route path='/characters' element={<CharactersLogic  sessionToken={this.props.sessionToken} />} />
+                            <Route path = '/stories/edit'/>
+                        <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId}  sessionToken={this.props.sessionToken} />} />
+                            <Route path = 'characters/update/:userId'/>
                         <Route path='/journal' element={<JournalLogic  sessionToken={this.props.sessionToken} />} />
                     </Routes>
                 </BrowserRouter>
+
                 <div className='Sidebar'>
                     <h1>LINKS</h1>
                     <Link to ="/stories">Stories</Link>
+                    <Link to ="/stories/edit">Edit Story</Link>
                     <Link to ="/characters">Characters</Link>
+                    <Link to ="/characters/update/:userId">Update Character</Link>
                     <Link to ="/journal">Journals</Link>
                 </div>
             </div>

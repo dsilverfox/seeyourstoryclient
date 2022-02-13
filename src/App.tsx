@@ -3,7 +3,7 @@ import './App.css';
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
-
+// import {Link} from 'react-router-dom';
 
 export interface tokenState {
   sessionToken: string | null
@@ -70,6 +70,12 @@ class App extends React.Component<{}, tokenState> {
       <div className="App">
         <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId} />
         {this.protectedViews()}
+          {/* <h1>LINKS</h1>
+        <Link to="/stories">Stories</Link>
+        <Link to="/stories/edit">Edit Story</Link>
+        <Link to="/characters">Characters</Link>
+        <Link to="/characters/update/:userId">Update Character</Link>
+        <Link to="/journal">Journals</Link> */}
       </div>
     )
   }
