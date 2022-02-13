@@ -26,9 +26,9 @@ class AppBar extends React.Component<navProps, {}> {
                 </Navbar.Brand>
                
             </Container>
-            Welcome, {this.props.username}
+                Welcome, {localStorage.getItem('localName')}
             <br/>
-            UserID: {this.props.userId}
+                UserID: {localStorage.getItem('localUserId')}
             <button className="logout" onClick={this.props.clickLogout}> Logout </button>
         </Navbar>
         </>

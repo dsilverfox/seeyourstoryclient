@@ -71,11 +71,11 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //EDIT STORY
     editStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         event.preventDefault();
-        await this.setState({ storyId: id })
+        // await this.setState({ storyId: id })
         fetch(`${APIURL}/story/update/${this.state.storyId}`, {
             method: "PUT",
             body: JSON.stringify({
-                editStories: {
+                stories: {
                     title: this.state.title.value,
                     content: this.state.content.value,
                 }
@@ -95,6 +95,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 this.setState({ content: this.state.content })
                 this.setState({ storyId: storyData.id })
             })
+            this.viewallStories(event);
+            this.setState({isOpen:false})
     }
 
     //DELETE A STORY
@@ -177,7 +179,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             return (
                 <>
                   <Container className="Allstories">
-                    <Card key={index} style={{ width: '15rem' }}>
+                    <Card key={index}>
                         <Card.Body>
                             <Card.Title>{story.title}</Card.Title>
                             <Card.Text>{story.content}
@@ -194,47 +196,47 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //FUNCTION FOR DISPLAYING ONE STORY
     storyMapOne = () => {
             return (
-                    <Card className="viewOne" style={{ width: '15rem' }}>
+                    <Card className="viewOne">
                         <Card.Body>
                             <Card.Title>{this.state.story.title}</Card.Title>
                             <Card.Text>{this.state.story.content}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.editStoryModal}>Edit Story</Button>
+                            <Button variant="primary" onClick={(event) => this.setState({isOpen: true})}>Edit Story</Button>
                             <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
                         </Card.Body>
                     </Card>
             );
         };
         //FUNCTION FOR EDIT STORY MODAL
-    editStoryModal = () => {
-            this.setState({isOpen: true})
-        const hideModal = () => {
-            this.setState({isOpen: false})
-            console.log(this.state.storyId)
-        }
-    return(
-    <Modal show = {this.state.isOpen} >
-      <Modal.Header>Edit Your Story</Modal.Header>
-      <Modal.Body>
-          <Form>
-                <Form.Label>Title:</Form.Label>
-                <input type="text" placeholder="Enter your Story Title"
-                    value={this.state.title.value}
-                    onChange={this.handleTitle}></input>
+//     editStoryModal = () => {
+//             this.setState({isOpen: true})
+//         const hideModal = () => {
+//             this.setState({isOpen: false})
+//             console.log(this.state.storyId)
+//         }
+//     return(
+//     <Modal show = {this.state.isOpen} >
+//       <Modal.Header>Edit Your Story</Modal.Header>
+//       <Modal.Body>
+//           <Form>
+//                 <Form.Label>Title:</Form.Label>
+//                 <input type="text" placeholder="Enter your Story Title"
+//                     value={this.state.title.value}
+//                     onChange={this.handleTitle}></input>
 
-                <Form.Label>Content:</Form.Label>
-                <input type="text"
-                    value={this.state.content.value}
-                    onChange={this.handleContent}></input>
-          </Form>
-          </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={(event) => {hideModal()}}>Cancel Edit</Button>
-        <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
-        </Modal.Footer>
-    </Modal>
-  );
-    };
+//                 <Form.Label>Content:</Form.Label>
+//                 <input type="text"
+//                     value={this.state.content.value}
+//                     onChange={this.handleContent}></input>
+//           </Form>
+//           </Modal.Body>
+//       <Modal.Footer>
+//         <Button variant="primary" onClick={(event) => {this.hideModal()}}>Cancel Edit</Button>
+//         <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
+//         </Modal.Footer>
+//     </Modal>
+//   );
+//     };
 
     // storySelect () => {
     // (this.state.viewoneFire && this.storyMapOne()  ? this.storyMapOne() : this.state.viewallFire && this.storyMapper() )
@@ -259,11 +261,31 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 </form>
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
 
-                <div>
-                    <><div className='cardGroup'>{this.state.viewallFire && this.storyMapper()}</div></>
+                    <div className='cardGroup'>{this.state.viewallFire && this.storyMapper()}</div>
                     <>{this.state.viewoneFire && this.storyMapOne()}</>
-            
-                </div>
+                    <>
+                    <Modal show={this.state.isOpen} >
+                        <Modal.Header>Edit Your Story</Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Label>Title:</Form.Label>
+                                <input type="text" placeholder="Enter your Story Title"
+                                    value={this.state.title.value}
+                                    onChange={this.handleTitle}></input>
+
+                                <Form.Label>Content:</Form.Label>
+                                <input type="text"
+                                    value={this.state.content.value}
+                                    onChange={this.handleContent}></input>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={(event) => this.setState({isOpen:false})}>Cancel Edit</Button>
+                            <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
+                        </Modal.Footer>
+                    </Modal>
+                    </>
+          
             </div>
         )
     }
