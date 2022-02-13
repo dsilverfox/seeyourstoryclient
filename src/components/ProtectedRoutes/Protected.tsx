@@ -14,7 +14,7 @@ class Protected extends React.Component<protectedProps, {}> {
 
     adminUser = () => {
         console.log(this.props.hasAdmin)
-        return (this.props.hasAdmin === true ? <AdminLogic sessionToken={this.props.sessionToken} /> : null)
+        return (this.props.hasAdmin === true ? <AdminLogic sessionToken={this.props.sessionToken} hasAdmin={this.props.hasAdmin} /> : null)
     }
     render() {
         return (

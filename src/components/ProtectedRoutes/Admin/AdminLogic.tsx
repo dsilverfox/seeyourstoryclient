@@ -2,6 +2,7 @@ import React from 'react';
 import APIURL from '../../../helpers/environment'
 interface AdminProps {
     sessionToken: string | null
+    hasAdmin: boolean
 }
 
 interface AdminVars {
@@ -29,6 +30,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
 //VIEW ALL USERS
     viewUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
+        console.log(this.props.hasAdmin)
         await fetch(`${ APIURL }/auth/userinfo`, {
             method: "GET",
             headers: new Headers({
@@ -39,7 +41,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
         })
         .then((res)=> res.json())
         .then((usersData) => {
-            console.log(usersData);
+            // console.log(usersData);
             this.setState({users: usersData.users});
         })
         this.userList();
@@ -47,8 +49,9 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     }
 
 //DELETE A USER
-    deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
+    deleteUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         // event.preventDefault();
+        console.log(this.props.hasAdmin)
         console.log(this.state.id)
         await fetch(`${APIURL}/auth/delete/${this.state.id}`, {
             method: "DELETE",
@@ -64,29 +67,40 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     
     userList = () => {
         return this.state.users.map((user, index) => {
-            console.log(user)
             return (
                 <ol>
                     <li className="Userlist" key={index}>{index+1}: {user.username} -- {user.id}</li>
-                    <button onClick={(event) => this.deleteUsers(event, this.state.id)}>Delete User</button>
+                    <button
+                        className="delete"
+                        id='danger'
+                        onMouseOver={(event) => {this.setState({id: user.id})}}
+                        onClick={(event) => {
+                            const confirmBox =
+                                window.confirm(
+                                    "Do you really want to delete this User? This action cannot be undone!"
+                                )
+                            if (confirmBox === true) {this.deleteUsers(event) }
+                        }
+                        }
+                    > Delete </button>
                 </ol>
             )
         })
     };
 
-    handleID = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ id: event.target.value})
-    }
+    // handleID = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>)  => {
+    //     this.setState({ id: this.state.id })
+    // }
 
     render() {
-        console.log(this.state.users)
+        // console.log(this.state.users)
         return(
             <div className="Admin">
                 <h1>Greeting Admin!</h1>
                 <p>You can perform three functions from this page. You can delete your account. You can view all users on the site and using their ID you can delete any user.</p>
                 <button onClick={(event) => {this.viewUsers(event)}}>View Users</button>
 
-                <label>User ID:</label>
+                {/* <label>User ID:</label>
                 <input type="text"
                     value={this.state.id}
                     onChange={this.handleID}></input>
@@ -99,10 +113,10 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
                             window.confirm(
                                 "Do you really want to delete this User? This action cannot be undone!"
                             )
-                        if (confirmBox === true) {this.deleteUsers((event), this.state.id)}
+                        if (confirmBox === true) {this.deleteUsers(event)}
                     }
                     }
-                > Delete </button>
+                > Delete </button> */}
 
                 <>{this.state.userListFire && this.userList()}</>
                 
