@@ -4,6 +4,7 @@ import AdminLogic from './Admin/AdminLogic'
 import UserDisplay from '../UnprotectedRoutes/User/UserDisplay'
 
 interface protectedProps {
+    clearToken: React.MouseEventHandler<HTMLButtonElement>,
     sessionToken: string | null
     hasAdmin: boolean
     username: string,
@@ -20,7 +21,7 @@ class Protected extends React.Component<protectedProps, {}> {
         return (
             <div>
                 {this.adminUser()}
-                <UserDisplay sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />
+                <UserDisplay clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />
                 <StoriesLogic sessionToken={this.props.sessionToken} />
 
             </div>

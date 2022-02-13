@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import APIURL from "../../../helpers/environment";
 
 interface UserDisplayProps {
+    clearToken: React.MouseEventHandler<HTMLButtonElement>,
     sessionToken: string | null
     username: string,
     userId: string
@@ -30,6 +31,7 @@ class UsersDisplay extends React.Component<UserDisplayProps, DisplayVars> {
                 "Authorization": `${this.props.sessionToken}`
             })
         })
+        this.props.clearToken(event);
         console.log("Account Deleted")
     }
 
