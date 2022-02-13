@@ -59,6 +59,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
             })
         })
         .then(() => this.viewUsers(event));
+        console.log("User Deleted")
     }
     
     userList = () => {
