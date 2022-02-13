@@ -9,7 +9,7 @@ interface characterVars {
     lastname: { value: string },
     gender: { value: string },
     age: { value: string },
-    dob: string | Date,
+    dob: string,
     characters: {}
 }
 
@@ -41,7 +41,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                 }
             }),
             headers: new Headers({
-               "Accept": "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `${this.props.sessionToken}`
             }),
@@ -71,7 +71,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                 }
             }),
             headers: new Headers({
-       "Accept": "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `${this.props.sessionToken}`
             }),
@@ -89,7 +89,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
         await fetch(`${APIURL}/Character/delete/:CharacterId`, {
             method: "DELETE",
             headers: new Headers({
-       "Accept": "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `${this.props.sessionToken}`
             })
@@ -102,7 +102,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
         fetch(`${APIURL}/Character/view`, {
             method: 'GET',
             headers: new Headers({
-       "Accept": "application/json",
+                "Accept": "application/json",
                 'Content-Type': 'application/json',
                 "Authorization": `${this.props.sessionToken}`
             }),
@@ -114,13 +114,13 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
             });
     }
 
-    //VIEW ALL Characters
+    //VIEW One Character
     viewoneCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         fetch(`${APIURL}/Character/view/:characterId`, {
             method: 'GET',
             headers: new Headers({
-       "Accept": "application/json",
+                "Accept": "application/json",
                 'Content-Type': 'application/json',
                 "Authorization": `${this.props.sessionToken}`
             }),
@@ -148,14 +148,14 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     }
 
     handleDOB = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ dob: event.target.value})
+        this.setState({ dob: event.target.value })
     }
-    render() {
+    render(): React.ReactNode {
         return (
             <div>
                 <form>
                     <label>First Name:</label>
-                    <input type="text" placeholder="Enter your Story Title"
+                    <input type="text"
                         value={this.state.firstname.value}
                         onChange={this.handleFirstname}></input>
 
@@ -177,7 +177,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
                     <label>Date of Birth:</label>
                     <input type="text"
-                        value={this.state.age.value}
+                        value={this.state.dob}
                         onChange={this.handleDOB}></input>
 
                     <button onClick={(event) => { this.createCharacter(event) }}>Create a New Character</button>

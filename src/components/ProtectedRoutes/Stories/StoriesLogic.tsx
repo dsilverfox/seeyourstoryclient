@@ -207,40 +207,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     </Card>
             );
         };
-        //FUNCTION FOR EDIT STORY MODAL
-//     editStoryModal = () => {
-//             this.setState({isOpen: true})
-//         const hideModal = () => {
-//             this.setState({isOpen: false})
-//             console.log(this.state.storyId)
-//         }
-//     return(
-//     <Modal show = {this.state.isOpen} >
-//       <Modal.Header>Edit Your Story</Modal.Header>
-//       <Modal.Body>
-//           <Form>
-//                 <Form.Label>Title:</Form.Label>
-//                 <input type="text" placeholder="Enter your Story Title"
-//                     value={this.state.title.value}
-//                     onChange={this.handleTitle}></input>
 
-//                 <Form.Label>Content:</Form.Label>
-//                 <input type="text"
-//                     value={this.state.content.value}
-//                     onChange={this.handleContent}></input>
-//           </Form>
-//           </Modal.Body>
-//       <Modal.Footer>
-//         <Button variant="primary" onClick={(event) => {this.hideModal()}}>Cancel Edit</Button>
-//         <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
-//         </Modal.Footer>
-//     </Modal>
-//   );
-//     };
-
-    // storySelect () => {
-    // (this.state.viewoneFire && this.storyMapOne()  ? this.storyMapOne() : this.state.viewallFire && this.storyMapper() )
-    // }
  
     render(): React.ReactNode {
         return (
@@ -282,6 +249,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                         <Modal.Footer>
                             <Button variant="primary" onClick={(event) => this.setState({isOpen:false})}>Cancel Edit</Button>
                             <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
+                            {/* <Button onClick={(event) => HALP}>Create Character</Button> */}
                         </Modal.Footer>
                     </Modal>
                     </>

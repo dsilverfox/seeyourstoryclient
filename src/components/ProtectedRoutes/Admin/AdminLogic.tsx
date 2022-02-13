@@ -92,7 +92,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
     //     this.setState({ id: this.state.id })
     // }
 
-    render() {
+    render(): React.ReactNode {
         // console.log(this.state.users)
         return(
             <div className="Admin">

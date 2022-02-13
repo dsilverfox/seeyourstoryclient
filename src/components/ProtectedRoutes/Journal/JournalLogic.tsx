@@ -2,7 +2,7 @@ import React from 'react';
 import APIURL from '../../../helpers/environment';
 
 interface journalProps{
-    sessionToken: string
+    sessionToken: string | null;
 }
 
 interface journalVars {
