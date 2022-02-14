@@ -1,7 +1,7 @@
 import React from "react";
 import APIURL from "../../../helpers/environment";
+import {Alert} from 'react-bootstrap';
 
-// import {Alert} from 'react-bootstrap';
 interface userProps {
     updateToken: (newToken: string) => void 
     setAdmin: (b: boolean) => void
@@ -15,11 +15,12 @@ export interface UserVars {
     username: {value: string},
     password: {value: string},
     userId: string,
+    validPass: boolean
 }
 
-//REGEX Variables
-// const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})");
-// const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+// REGEX Variables
+const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})");
+const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
 class UserLogic extends React.Component<userProps, UserVars> {
     constructor(props: userProps) {
@@ -30,49 +31,42 @@ class UserLogic extends React.Component<userProps, UserVars> {
             // updateToken: " ",
             username: { value: '' },
             password: { value: '' },
-            userId: ''
+            userId: '',
+            validPass: false,
         }
-        // this.analyze = this.analyze.bind(this);
+        this.analyze = this.analyze.bind(this);
     }
     
-//REGEX ANALYZE
+// REGEX ANALYZE
 
-    // analyze(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    //     if (strongRegex.test(this.state.password.value)) {
-    //         return
-    //     } else if (mediumRegex.test(this.state.password.value)) {
-    //         return (
-    //             <Alert variant="warning" onClose={() => setShow(false)} dismissible>
-    //                 <Alert.Heading>Your password is Medium Strength</Alert.Heading>
-    //                 <p>
-    //                     Your password MUST:
-    //                     Must be 8 characters or longer.
-    //                     Must contain at least 1 lowercase
-    //                     Must contain at least 1 uppercase
-    //                     Must contain at least 1 number
-    //                     Must contain at least 1 special character
-    //                 </p>
-    //             </Alert>
-    //         );
-    //     } else {
-    //         return (
-    //             <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-    //                 <Alert.Heading>Your password does not meet requirements!</Alert.Heading>
-    //                 <p>
-    //                     Your password MUST:
-    //                     Must be 8 characters or longer.
-    //                     Must contain at least 1 lowercase
-    //                     Must contain at least 1 uppercase
-    //                     Must contain at least 1 number
-    //                     Must contain at least 1 special character
-    //                 </p>
-    //             </Alert>
-    //         );
-    //     }
-    // }
+    setShow(arg0: boolean): void {
+        throw new Error("Function not implemented.");
+    }
+
+    analyze(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        if (strongRegex.test(this.state.password.value) || mediumRegex.test(this.state.password.value)) {
+            this.setState({validPass:true})
+            this.registerUsers(event);
+        } else {
+            // this.setState({validPass: false})
+            return (
+                <Alert variant="danger" onClose={() => this.setShow(false)} dismissible>
+                    <Alert.Heading>Your password does not meet requirements!</Alert.Heading>
+                    <p>
+                        Your password MUST:
+                        Must be 8 characters or longer.
+                        Must contain at least 1 lowercase
+                        Must contain at least 1 uppercase
+                        Must contain at least 1 number
+                        Must contain at least 1 special character
+                    </p>
+                </Alert>
+            );
+        }
+    }
 
 //REGISTER USER
-    registerUsers = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    registerUsers = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         console.log("Username State", this.state.username.value, "PASSWORD STATE", this.state.password.value)
         event.preventDefault();
     fetch(`${APIURL}/auth/signup`,{
@@ -100,8 +94,6 @@ class UserLogic extends React.Component<userProps, UserVars> {
             .catch(error => {
                 console.log(error)
             })
-
-        // this.analyze(event)
     }
 
 //LOGIN USER
@@ -147,10 +139,11 @@ class UserLogic extends React.Component<userProps, UserVars> {
     handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({username: {value: event.target.value}})
         }
-    
+
     handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({password: {value: event.target.value} })
+            this.setState({ password: { value: event.target.value } })
     }
+
 
     handleUserId = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({userId: event.target.value})
@@ -162,19 +155,20 @@ class UserLogic extends React.Component<userProps, UserVars> {
             <div className="UserInput">
                 <form>
                     <label>Username:</label>
-                    <input type="email" placeholder="Enter a Username"
+                    <input type="text" placeholder="Enter a Username"
                     value={this.state.username.value}
-                    onChange={this.handleUsername}></input>
+                    onChange={this.handleUsername}/>
 
 
                     <label>Password:</label>
                     <input type="password"
                     value={this.state.password.value}
-                    onChange={this.handlePassword}></input>
+                    onChange={this.handlePassword}
+                    />
 
                     <button onClick={(event) => { this.loginUsers(event) }}>Login</button>
                     
-                    <button onClick={(event) => { this.registerUsers(event) }}>Register</button>
+                    <button onClick={(event) => { this.analyze(event) }}>Register</button>
                 </form>
 
 
@@ -185,3 +179,5 @@ class UserLogic extends React.Component<userProps, UserVars> {
 }
 
 export default UserLogic;
+
+
