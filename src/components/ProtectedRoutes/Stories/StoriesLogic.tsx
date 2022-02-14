@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Modal, Form, Container} from 'react-bootstrap';
+import { Card, Button, Modal, Form, Container } from 'react-bootstrap';
 import APIURL from '../../../helpers/environment';
 import CharactersLogic from "../Characters/CharactersLogic"
 
@@ -18,7 +18,7 @@ interface storyVars {
     viewallFire: boolean
     viewoneFire: boolean
     storyId: string
-    story: {id: string, title: string, content: string},
+    story: { id: string, title: string, content: string },
     isOpen: boolean
     createFire: boolean
 }
@@ -34,7 +34,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             viewallFire: false,
             viewoneFire: false,
             storyId: '',
-            story: {id: '', title: '', content: ''},
+            story: { id: '', title: '', content: '' },
             isOpen: false,
             createFire: true,
         }
@@ -67,12 +67,11 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .catch(error => {
                 console.log(error)
             });
-            this.viewallStories(event);
-            //This does not fire.
+        this.viewallStories(event);
     }
 
     //EDIT STORY
-    editStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
+    editStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
         event.preventDefault();
         // await this.setState({ storyId: id })
         fetch(`${APIURL}/story/update/${this.state.storyId}`, {
@@ -98,13 +97,13 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 this.setState({ content: this.state.content })
                 this.setState({ storyId: storyData.id })
             })
-            this.viewallStories(event);
-            this.setState({isOpen:false})
+        this.viewallStories(event);
+        this.setState({ isOpen: false })
     }
 
     //DELETE A STORY
 
-    deleteStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
+    deleteStory = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
         // event.preventDefault();
         await this.setState({ storyId: id })
         await fetch(`${APIURL}/story/delete/${this.state.storyId}`, {
@@ -123,7 +122,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     //VIEW ALL STORIES
     viewallStories = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        fetch(`${ APIURL }/story/view`, {
+        fetch(`${APIURL}/story/view`, {
             method: 'GET',
             headers: new Headers({
                 "Accept": "application/json",
@@ -161,8 +160,10 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 this.setState({ story: storyData });
                 // console.log(storyData)
             });
+        this.setState({ storyId: this.state.storyId })
         this.storyMapOne()
-        this.setState({viewoneFire: true})
+        this.setState({ viewoneFire: true })
+        this.setState({ createFire: true })
         console.log('STORY', this.state.story)
     }
 
@@ -181,15 +182,15 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
         return this.state.stories.map((story, index) => {
             return (
                 <>
-                  <Container className="Allstories">
-                    <Card key={index}>
-                        <Card.Body>
-                            <Card.Title>{story.title}</Card.Title>
-                            <Card.Text>{story.content}
-                            </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
-                        </Card.Body>
-                    </Card>
+                    <Container className="Allstories">
+                        <Card key={index}>
+                            <Card.Body>
+                                <Card.Title>{story.title}</Card.Title>
+                                <Card.Text>{story.content}
+                                </Card.Text>
+                                <Button variant="primary" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
+                            </Card.Body>
+                        </Card>
                     </Container>
                 </>
             );
@@ -198,29 +199,30 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
     //FUNCTION FOR DISPLAYING ONE STORY
     storyMapOne = () => {
-            return (
-                    <Card className="viewOne">
-                        <Card.Body>
-                            <Card.Title>{this.state.story.title}</Card.Title>
-                            <Card.Text>{this.state.story.content}
-                            </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.setState({isOpen: true})}>Edit Story</Button>
-                            <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
-                            <Button variant="primary" onClick={(event)=> this.handleCharacter()}>Create Character</Button>
-                        </Card.Body>
-                    </Card>
-            );
-        };
-
-    
-    handleCharacter = () => {
-        this.setState({storyId: this.state.storyId})
-        this.setState({createFire: true})
-    }
+        return (
+            <Card className="viewOne">
+                <Card.Body>
+                    <Card.Title>{this.state.story.title}</Card.Title>
+                    <Card.Text>{this.state.story.content}
+                    </Card.Text>
+                    <Button variant="primary" onClick={(event) => this.setState({ isOpen: true })}>Edit Story</Button>
+                    <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
+                    <Button variant="primary" onClick={(event) => this.displayCharacter()}>Characters</Button>
+                </Card.Body>
+            </Card>
+        );
+    };
 
     displayCharacter = () => {
-     return (this.state.createFire === true ? <CharactersLogic sessionToken={this.props.sessionToken} storyId={this.state.storyId}/> : null)
+        return (this.state.createFire === true ? <CharactersLogic sessionToken={this.props.sessionToken} storyId={this.state.storyId} /> : null)
     }
+
+    // handleCharacter = () => {
+    //     this.setState({ storyId: this.state.storyId })
+    //     this.setState({ createFire: true })
+    // }
+
+
 
     render(): React.ReactNode {
         return (
@@ -241,11 +243,14 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                 </form>
                 <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
 
-                    <div className='cardGroup'>{this.state.viewallFire && this.storyMapper()}</div>
+                {/* View All Stories*/}
+                <div className='cardGroup'>{this.state.viewallFire && this.storyMapper()}</div>
 
-                    {/* View One Story */}
-                    <>{this.state.viewoneFire && this.storyMapOne()}</>
-                    <>
+                {/* View One Story */}
+                <>{this.state.viewoneFire && this.storyMapOne()}</>
+
+                {/* Edit Story */}
+                <>
                     <Modal show={this.state.isOpen} >
                         <Modal.Header>Edit Your Story</Modal.Header>
                         <Modal.Body>
@@ -262,14 +267,13 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="primary" onClick={(event) => this.setState({isOpen:false})}>Cancel Edit</Button>
+                            <Button variant="primary" onClick={(event) => this.setState({ isOpen: false })}>Cancel Edit</Button>
                             <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
-                            
                         </Modal.Footer>
                     </Modal>
-                    </>
-                    <>{this.displayCharacter()}</>
-          
+                </>
+                {/* Create Character (EVENTUALLY TAKING ONE TO CHARACTER PAGE) */}
+                <>{this.state.createFire && this.displayCharacter()}</>
             </div>
         )
     }
