@@ -7,6 +7,7 @@ import APIURL from '../../../helpers/environment'
 interface characterProps {
     sessionToken: string | null
     storyId: string
+    userId: string
 }
 
 interface characterVars {
@@ -17,12 +18,12 @@ interface characterVars {
     age: string,
     dob: string,
     characters: {
-        firstname: "", 
-        lastname: "", 
-        gender: "", 
-        age: "", 
-        dob: "",
-        id: ""
+        firstname: string,
+        lastname: string,
+        gender: string,
+        age: string,
+        dob: string,
+        id: string
     }[]
     character: {
         firstname: string,
@@ -30,12 +31,12 @@ interface characterVars {
         gender: string,
         age: string,
         dob: string,
-        id: string, 
+        id: string,
     }
-        viewOneFire: boolean
-        viewAllFire: boolean
-        isOpen: boolean
-    }
+    viewOneFire: boolean
+    viewAllFire: boolean
+    isOpen: boolean
+}
 
 class CharacterLogic extends React.Component<characterProps, characterVars> {
     constructor(props: characterProps) {
@@ -48,12 +49,13 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
             gender: "",
             age: "",
             dob: "",
-            characters: [{ firstname: "", lastname: "", gender: "", age: "", dob: "", id:""}],
-            character: {firstname: "", lastname: "", gender: "", age: "", dob: "", id:""},
+            characters: [{ firstname: "", lastname: "", gender: "", age: "", dob: "", id: "" }],
+            character: { firstname: "", lastname: "", gender: "", age: "", dob: "", id: "" },
             viewOneFire: false,
             viewAllFire: false,
             isOpen: false,
         }
+        this.deleteCharacter=this.deleteCharacter.bind(this)
     }
 
     createCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -81,17 +83,19 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                 console.log(CharacterData)
                 this.setState({ characterId: CharacterData.id })
             })
-            this.viewallCharacters(event);
+        this.viewallCharacters();
 
     }
 
     //EDIT Character
-    editCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
+    editCharacter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
+        console.log("Edit Beginning")
         event.preventDefault();
-        fetch(`${APIURL}/characters/update/${this.state.characterId}`, {
+        console.log(id)
+        fetch(`${APIURL}/characters/update/${id}`, {
             method: "PUT",
             body: JSON.stringify({
-                Character: {
+                character: {
                     firstname: this.state.firstname,
                     lastname: this.state.lastname,
                     gender: this.state.gender,
@@ -108,19 +112,21 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
             .then((res) => res.json())
             .then((CharacterData) => {
                 console.log(CharacterData)
-                this.setState({ characterId: CharacterData.id })
+                console.log("Edit Done")
             })
-            this.viewallCharacters(event)
-            ;
-            this.setState({isOpen: false})
+            .catch(err =>{
+                console.log("Error:", err)
+            })  
+        this.viewallCharacters();
+        this.setState({ isOpen: false })
     }
 
     //DELETE A Character
 
-    deleteCharacter = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
-        event.preventDefault();
-        await this.setState({characterId: id})
-        await fetch(`${APIURL}/characters/delete/${this.state.characterId}`, {
+    async deleteCharacter () {
+
+        console.log(this.state.character.id)
+        await fetch(`${APIURL}/characters/delete/${this.state.character.id}`, {
             method: "DELETE",
             headers: new Headers({
                 "Accept": "application/json",
@@ -128,14 +134,14 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                 "Authorization": `${this.props.sessionToken}`
             })
         })
-        console.log("Character Deleted")
         console.log(this.state.characters)
-        this.viewallCharacters(event);
+        this.viewallCharacters();
+        this.setState({viewOneFire: false})
     }
 
     //VIEW ALL Characters
-    viewallCharacters = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.preventDefault();
+    viewallCharacters = () => {
+
         fetch(`${APIURL}/characters/view`, {
             method: 'GET',
             headers: new Headers({
@@ -155,9 +161,9 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     }
 
     //VIEW One Character
-    viewoneCharacter = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
+    viewoneCharacter = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
         event.preventDefault();
-        await this.setState({characterId: id})
+        await this.setState({ characterId: id })
         fetch(`${APIURL}/characters/view/${this.state.characterId}`, {
             method: 'GET',
             headers: new Headers({
@@ -173,15 +179,16 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
             })
             .then((CharacterData) => {
                 console.log("Character data for set state", CharacterData)
-                this.setState({ character: CharacterData });
-                this.setState({ characterId: CharacterData.id})
-                
-            }); 
-            this.setState({viewOneFire: true})
-            console.log("FIRE STATE", this.state.viewOneFire)
-            this.characterMapOne()
-            console.log('Character State', this.state.character)
-            console.log("Character Id State", this.state.characterId)
+                //add other setStates as necessary once anything actually sets in state.
+                this.setState({ characterId: CharacterData.id })
+                this.setState({ character: CharacterData })
+            });
+
+        this.setState({ viewOneFire: true })
+        console.log("FIRE STATE", this.state.viewOneFire)
+        console.log('Character FN State', this.state.character.firstname)
+        console.log("Character Id State", this.state.character.id)
+        // this.characterMapOne()
     }
 
     //HANDLER FUNCTIONS
@@ -211,41 +218,39 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     charactersMapper = () => {
         return this.state.characters.map((character, index) => {
             return (
-                <>
-                    <Container className="Allstories">
-                        <Card key={index}>
-                            <Card.Body>
-                                <Card.Title>{character.firstname} {character.lastname}</Card.Title>
-                                <Card.Text>
-                                    Gender: {character.gender}
-                                    <br />
-                                    Age: {character.age}
-                                    <br />
-                                    Date of Birth{character.dob}
-                                </Card.Text>
-                                <Button variant="primary" onClick={(event) => this.viewoneCharacter(event, character.id)}>Select Character</Button>
-                            </Card.Body>
-                        </Card>
-                    </Container>
-                </>
+                <Container key={character.id} className="Allstories">
+                    <Card >
+                        <Card.Body>
+                            <Card.Title>{character.firstname} {character.lastname}</Card.Title>
+                            <Card.Text>
+                                Gender: {character.gender}
+                                <br />
+                                Age: {character.age}
+                                <br />
+                                Date of Birth{character.dob}
+                            </Card.Text>
+                            <Button variant="primary" onClick={(event) => this.viewoneCharacter(event, character.id)}>Select Character</Button>
+                        </Card.Body>
+                    </Card>
+                </Container>
             );
         });
     };
 
     //DISPLAY ONE CHARACTER
-    characterMapOne = () => {
+    characterMapOne() {
         return (
             <Card className="viewOne">
                 <Card.Body>
                     <Card.Title>{this.state.character.firstname} {this.state.character.lastname}</Card.Title>
                     <Card.Text>{this.state.character.gender}
-                    <br/>
-                    {this.state.character.age}
-                    <br/>
-                    {this.state.character.dob}
+                        <br />
+                        {this.state.character.age}
+                        <br />
+                        {this.state.character.dob}
                     </Card.Text>
                     <Button variant="primary" onClick={(event) => this.setState({ isOpen: true })}>Edit Character</Button>
-                    <Button variant="primary" onClick={(event) => this.deleteCharacter(event, this.state.character.id)}>Delete Character</Button>
+                    <Button variant="primary" onClick={this.deleteCharacter}>Delete Character</Button>
                     {/* <Button variant="primary" onClick={(event) => this.displayCharacter()}>Characters</Button> */}
                 </Card.Body>
             </Card>
@@ -284,7 +289,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
                     <button onClick={(event) => { this.createCharacter(event) }}>Create a New Character</button>
 
-                    <button onClick={(event) => { this.viewallCharacters(event) }}>View All Characters</button>
+                    <button type="button" onClick={this.viewallCharacters}>View All Characters</button>
                 </form>
 
 
@@ -293,12 +298,12 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
                 {/* VIEW ALL CHARACTERS */}
                 <div>
-                <>{this.state.viewAllFire && this.charactersMapper()}</>
+                    <>{this.state.viewAllFire && this.charactersMapper()}</>
                 </div>
-                
+
                 {/* VIEW ONE CHARACTER */}
                 <>{this.state.viewOneFire && this.characterMapOne()}</>
-                
+
                 {/* EDIT CHARACTER */}
 
                 <>
@@ -334,7 +339,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="primary" onClick={(event) => this.setState({ isOpen: false })}>Cancel Edit</Button>
-                            <Button variant="primary" onClick={(event) => this.editCharacter(event, this.state.characterId)}>Save Character</Button>
+                            <Button variant="primary" onClick={(event) => this.editCharacter(event, this.state.character.id)}>Save Character</Button>
                         </Modal.Footer>
                     </Modal>
                 </>

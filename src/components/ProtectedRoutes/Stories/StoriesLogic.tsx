@@ -2,9 +2,11 @@ import React from 'react';
 import { Card, Button, Modal, Form, Container } from 'react-bootstrap';
 import APIURL from '../../../helpers/environment';
 import CharactersLogic from "../Characters/CharactersLogic"
+// import {Link} from 'react-router-dom';
 
 interface storyProps {
     sessionToken: string | null
+    userId: string
 }
 
 interface storyVars {
@@ -207,14 +209,14 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     </Card.Text>
                     <Button variant="primary" onClick={(event) => this.setState({ isOpen: true })}>Edit Story</Button>
                     <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
-                    <Button variant="primary" onClick={(event) => this.displayCharacter()}>Characters</Button>
+                    {/* <Link to ="/characters/CharactersLogic">Characters</Link> */}
                 </Card.Body>
             </Card>
         );
     };
 
     displayCharacter = () => {
-        return (this.state.createFire === true ? <CharactersLogic sessionToken={this.props.sessionToken} storyId={this.state.storyId} /> : null)
+        return (this.state.createFire === true ? <CharactersLogic sessionToken={this.props.sessionToken} storyId={this.state.storyId} userId={this.props.userId}/> : null)
     }
 
     // handleCharacter = () => {

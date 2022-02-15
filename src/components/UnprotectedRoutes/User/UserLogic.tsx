@@ -16,6 +16,7 @@ export interface UserVars {
     password: {value: string},
     userId: string,
     validPass: boolean
+    alertshow: boolean
 }
 
 // REGEX Variables
@@ -33,6 +34,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
             password: { value: '' },
             userId: '',
             validPass: false,
+            alertshow: false
         }
         this.analyze = this.analyze.bind(this);
     }
@@ -48,9 +50,9 @@ class UserLogic extends React.Component<userProps, UserVars> {
             this.setState({validPass:true})
             this.registerUsers(event);
         } else {
-            // this.setState({validPass: false})
+            this.setState({validPass: false})
             return (
-                <Alert variant="danger" onClose={() => this.setShow(false)} dismissible>
+                <Alert variant="danger" show={this.state.alertshow} onClose={() => this.setState({alertshow: false}) } dismissible>
                     <Alert.Heading>Your password does not meet requirements!</Alert.Heading>
                     <p>
                         Your password MUST:
@@ -167,12 +169,8 @@ class UserLogic extends React.Component<userProps, UserVars> {
                     />
 
                     <button onClick={(event) => { this.loginUsers(event) }}>Login</button>
-                    
                     <button onClick={(event) => { this.analyze(event) }}>Register</button>
                 </form>
-
-
-
             </div>
         )
     }

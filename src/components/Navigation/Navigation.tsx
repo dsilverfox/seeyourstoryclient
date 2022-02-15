@@ -22,7 +22,7 @@ interface passProps {
     storyId: string
 }
 
-class Protected extends React.Component<passProps, {}> {
+class Navigation extends React.Component<passProps, {}> {
 
 
     render() {
@@ -32,10 +32,10 @@ class Protected extends React.Component<passProps, {}> {
                     <Routes>
                         <Route path='/' element={<App />} />
                         <Route path='/users' element={<UsersDisplay clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />} />
-                        <Route path='/stories' element={<StoriesLogic sessionToken={this.props.sessionToken} />} />
+                        <Route path='/stories' element={<StoriesLogic sessionToken={this.props.sessionToken} userId={this.props.userId} />} />
                             <Route path = '/stories/edit'/>
-                        <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId}  sessionToken={this.props.sessionToken} />} />
-                            <Route path = 'characters/update/:userId'/>
+                        <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId}  sessionToken={this.props.sessionToken} userId={this.props.userId} />} />
+                            <Route path = 'characters/update/:characterId'/>
                         <Route path='/journal' element={<JournalLogic  sessionToken={this.props.sessionToken} />} />
                     </Routes>
                 </BrowserRouter>
@@ -45,7 +45,7 @@ class Protected extends React.Component<passProps, {}> {
                     <Link to ="/stories">Stories</Link>
                     <Link to ="/stories/edit">Edit Story</Link>
                     <Link to ="/characters">Characters</Link>
-                    <Link to ="/characters/update/:userId">Update Character</Link>
+                    <Link to ="/characters/update/:characterId">Update Character</Link>
                     <Link to ="/journal">Journals</Link>
                 </div>
             </div>
@@ -53,4 +53,4 @@ class Protected extends React.Component<passProps, {}> {
     }
 }
 
-export default Protected;
+export default Navigation;

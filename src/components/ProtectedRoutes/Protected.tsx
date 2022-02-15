@@ -10,7 +10,7 @@ interface protectedProps {
     sessionToken: string | null
     hasAdmin: boolean
     username: string,
-    userId: string
+    userId: string,
 }
 
 class Protected extends React.Component<protectedProps, {}> {
@@ -24,7 +24,7 @@ class Protected extends React.Component<protectedProps, {}> {
             <div>
                 {this.adminUser()}
                 <UserDisplay clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />
-                <StoriesLogic sessionToken={this.props.sessionToken} />
+                <StoriesLogic sessionToken={this.props.sessionToken} userId={this.props.userId} />
                 {/* <Navigation hasAdmin={this.props.hasAdmin} clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId}/> */}
                 {/* <CharactersLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken}/> */}
             </div>
