@@ -3,13 +3,17 @@ import './App.css';
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
-// import {Link} from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+} from 'react-router-dom';
 
 export interface tokenState {
   sessionToken: string | null
   hasAdmin: boolean
   username: string
   userId: string
+  storyId: string
 }
 
 class App extends React.Component<{}, tokenState> {
@@ -20,6 +24,7 @@ class App extends React.Component<{}, tokenState> {
       hasAdmin: false,
       username: "",
       userId: "",
+      storyId:"",
     }
   }
 
@@ -59,23 +64,25 @@ class App extends React.Component<{}, tokenState> {
     this.setState({ userId: i })
   }
 
+  setStoryId = (i: string) => {
+    this.setState({storyId: i})
+  }
+
   //If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
     console.log("Session Token on APP.JS", this.state.sessionToken)
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected clearToken={this.clearToken} sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId} /> : <Unprotected sessionToken={this.state.sessionToken} updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId} />)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected setStoryId={this.setStoryId} storyId={this.state.storyId} updateToken={this.updateToken} clearToken={this.clearToken} sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId} /> : <Unprotected sessionToken={this.state.sessionToken} updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId} />)
   }
 
   render() {
     return (
       <div className="App">
-        <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId} />
-        {this.protectedViews()}
-          {/* <h1>LINKS</h1>
-        <Link to="/stories">Stories</Link>
-        <Link to="/stories/edit">Edit Story</Link>
-        <Link to="/characters">Characters</Link>
-        <Link to="/characters/update/:userId">Update Character</Link>
-        <Link to="/journal">Journals</Link> */}
+      <BrowserRouter>
+        <Routes>
+            <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId} />
+            {this.protectedViews()}
+        </Routes>
+      </BrowserRouter>
       </div>
     )
   }

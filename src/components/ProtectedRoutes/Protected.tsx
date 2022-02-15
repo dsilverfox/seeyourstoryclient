@@ -2,8 +2,8 @@ import React from 'react';
 import StoriesLogic from './Stories/StoriesLogic'
 import AdminLogic from './Admin/AdminLogic'
 import UserDisplay from '../UnprotectedRoutes/User/UserDisplay'
-// import Navigation from '../Navigation/Navigation'
-// import CharactersLogic from './Characters/CharactersLogic';
+import CharactersLogic from './Characters/CharactersLogic';
+import {Route} from 'react-router-dom';
 
 interface protectedProps {
     clearToken: React.MouseEventHandler<HTMLButtonElement>,
@@ -11,6 +11,9 @@ interface protectedProps {
     hasAdmin: boolean
     username: string,
     userId: string,
+    storyId: string
+    setStoryId: (i:string) => void
+    updateToken: (newToken: string) => void
 }
 
 class Protected extends React.Component<protectedProps, {}> {
@@ -24,9 +27,8 @@ class Protected extends React.Component<protectedProps, {}> {
             <div>
                 {this.adminUser()}
                 <UserDisplay clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />
-                <StoriesLogic sessionToken={this.props.sessionToken} userId={this.props.userId} />
-                {/* <Navigation hasAdmin={this.props.hasAdmin} clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId}/> */}
-                {/* <CharactersLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken}/> */}
+                <StoriesLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} setStoryId={this.props.setStoryId} />
+                <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} />} />
             </div>
         )
     }

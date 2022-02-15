@@ -6,8 +6,8 @@ import APIURL from '../../../helpers/environment'
 
 interface characterProps {
     sessionToken: string | null
-    storyId: string
     userId: string
+    storyId: string
 }
 
 interface characterVars {

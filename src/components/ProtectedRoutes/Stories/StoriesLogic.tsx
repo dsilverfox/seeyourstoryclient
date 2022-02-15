@@ -7,6 +7,8 @@ import CharactersLogic from "../Characters/CharactersLogic"
 interface storyProps {
     sessionToken: string | null
     userId: string
+    storyId: string
+    setStoryId: (i: string) => void
 }
 
 interface storyVars {
