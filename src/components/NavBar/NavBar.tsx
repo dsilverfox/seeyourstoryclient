@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Container} from 'react-bootstrap'
+import {Navbar, Container, Button} from 'react-bootstrap'
 
 
 interface navProps {
@@ -29,7 +29,7 @@ class AppBar extends React.Component<navProps, {}> {
                 Welcome, {localStorage.getItem('localName')}
             <br/>
                 UserID: {localStorage.getItem('localUserId')}
-            <button className="logout" onClick={this.props.clickLogout}> Logout </button>
+            <Button variant="outline-light" className="logout" onClick={this.props.clickLogout}> Logout </Button>
         </Navbar>
         </>
     )

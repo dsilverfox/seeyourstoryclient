@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+// import styled from 'styled-components'
+// import Theme from './Theme'
+// import ThemeProvider from 'styled-components'
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
@@ -77,12 +80,12 @@ class App extends React.Component<{}, tokenState> {
   render() {
     return (
       <div className="App">
-      <BrowserRouter>
-        <Routes>
+      {/* <BrowserRouter> */}
+        {/* <Routes> */}
             <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId} />
             {this.protectedViews()}
-        </Routes>
-      </BrowserRouter>
+        {/* </Routes> */}
+      {/* </BrowserRouter> */}
       </div>
     )
   }
@@ -90,5 +93,3 @@ class App extends React.Component<{}, tokenState> {
 
 
 export default App;
-
-//updateToken={updateToken}

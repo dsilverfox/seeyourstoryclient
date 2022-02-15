@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  background-color: black;
-  color: silver;
+  background-color: Black;
+  color: #7B6D8D;
   width: 100vw;
   height: auto;
 }
@@ -42,23 +42,59 @@
   list-style: none;
 }
 
+.card-body {
+  background-color: #360D44;
+}
+
+.editModal {
+  background-color: #7B6D8D;
+  color: #360D44;
+
+}
+
+.editModal input {
+  margin: 1rem;
+}
+
 .cardGroup {
    display: flex;
    flex-wrap: wrap;
    justify-content: space-between;
+   row-gap: 10px;
 }
 
 .Allstories {
     max-width: 15rem;
-    margin: 5px;
-    box-shadow: 5px 5px 5px gray;
     flex: 0 1 24%;
 }
 
 .viewOne {
-    max-width: 20rem;
-    margin: 5px;
+    width: 65rem;
+    margin: auto;
+    margin-top: 1rem;
     box-shadow: 5px 5px 5px gray;
     flex: 0 1 24%;
     justify-content: center;
+    align-self: center;
+}
+
+.storiesInput form{
+  width: 100vw;
+}
+.storiesInput input{ 
+  margin: 1rem;
+}
+.storiesInput button {
+  margin: 1rem;
+}
+
+.characterInput form{
+  margin: 1rem;
+}
+
+.characterInput input{ 
+  margin: 1rem;
+}
+.characterInput button {
+  margin: 1rem;
 }

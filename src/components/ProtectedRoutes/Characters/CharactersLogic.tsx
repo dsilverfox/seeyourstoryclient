@@ -229,7 +229,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                                 <br />
                                 Date of Birth{character.dob}
                             </Card.Text>
-                            <Button variant="primary" onClick={(event) => this.viewoneCharacter(event, character.id)}>Select Character</Button>
+                            <Button variant="outline-light" onClick={(event) => this.viewoneCharacter(event, character.id)}>Select Character</Button>
                         </Card.Body>
                     </Card>
                 </Container>
@@ -249,9 +249,10 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                         <br />
                         {this.state.character.dob}
                     </Card.Text>
-                    <Button variant="primary" onClick={(event) => this.setState({ isOpen: true })}>Edit Character</Button>
-                    <Button variant="primary" onClick={this.deleteCharacter}>Delete Character</Button>
-                    {/* <Button variant="primary" onClick={(event) => this.displayCharacter()}>Characters</Button> */}
+                    <Button variant="outline-light" onClick={(event) => this.setState({ isOpen: true })}>Edit Character</Button>
+                    <Button variant="outline-light" onClick={this.deleteCharacter}>Delete Character</Button>
+                    {/* <Button onClick={(event) => this.setState({ isOpen: false })}>Cancel</Button> */}
+                    {/* <Button onClick={(event) => this.displayCharacter()}>Characters</Button> */}
                 </Card.Body>
             </Card>
         );
@@ -259,37 +260,40 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
     render(): React.ReactNode {
         return (
-            <div>
+            <div className="characterInput">
                 <form>
                     <label>First Name:</label>
                     <input type="text"
                         value={this.state.firstname}
                         onChange={this.handleFirstname}></input>
-
+                    <br/>
 
                     <label>Last Name:</label>
                     <input type="text"
                         value={this.state.lastname}
                         onChange={this.handleLastname}></input>
+                    <br/>
 
                     <label>Gender:</label>
                     <input type="text"
                         value={this.state.gender}
                         onChange={this.handleGender}></input>
+                    <br/>
 
                     <label>Age:</label>
                     <input type="text"
                         value={this.state.age}
                         onChange={this.handleAge}></input>
+                    <br/>
 
                     <label>Date of Birth:</label>
                     <input type="text"
                         value={this.state.dob}
                         onChange={this.handleDOB}></input>
+                    <br/>
+                    <Button variant="outline-light" onClick={(event) => { this.createCharacter(event) }}>Create a New Character</Button>
 
-                    <button onClick={(event) => { this.createCharacter(event) }}>Create a New Character</button>
-
-                    <button type="button" onClick={this.viewallCharacters}>View All Characters</button>
+                    <Button variant="outline-light" type="button" onClick={this.viewallCharacters}>View All Characters</Button>
                 </form>
 
 
@@ -297,7 +301,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
 
 
                 {/* VIEW ALL CHARACTERS */}
-                <div>
+                <div className='cardGroup'>
                     <>{this.state.viewAllFire && this.charactersMapper()}</>
                 </div>
 
@@ -307,7 +311,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                 {/* EDIT CHARACTER */}
 
                 <>
-                    <Modal show={this.state.isOpen} >
+                    <Modal show={this.state.isOpen} className="editModal">
                         <Modal.Header>Edit Your Character</Modal.Header>
                         <Modal.Body>
                             <Form>
@@ -315,7 +319,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                                 <input type="text"
                                     value={this.state.firstname}
                                     onChange={this.handleFirstname}></input>
-
+                                <br />
                                 <label>Last Name:</label>
                                 <input type="text"
                                     value={this.state.lastname}
@@ -325,21 +329,21 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                                 <input type="text"
                                     value={this.state.gender}
                                     onChange={this.handleGender}></input>
-
+                                <br />
                                 <label>Age:</label>
                                 <input type="text"
                                     value={this.state.age}
                                     onChange={this.handleAge}></input>
-
-                                <label>Date of Birth:</label>
+                                <br />
+                                <label>D.O.B:</label>
                                 <input type="text"
                                     value={this.state.dob}
                                     onChange={this.handleDOB}></input>
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="primary" onClick={(event) => this.setState({ isOpen: false })}>Cancel Edit</Button>
-                            <Button variant="primary" onClick={(event) => this.editCharacter(event, this.state.character.id)}>Save Character</Button>
+                            <Button variant="outline-dark" onClick={(event) => this.setState({ isOpen: false })}>Cancel Edit</Button>
+                            <Button variant="outline-dark" onClick={(event) => this.editCharacter(event, this.state.character.id)}>Save Character</Button>
                         </Modal.Footer>
                     </Modal>
                 </>

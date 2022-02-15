@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button, Modal, Form, Container } from 'react-bootstrap';
 import APIURL from '../../../helpers/environment';
 import CharactersLogic from "../Characters/CharactersLogic"
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 interface storyProps {
     sessionToken: string | null
@@ -185,18 +185,16 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
     storyMapper = () => {
         return this.state.stories.map((story, index) => {
             return (
-                <>
-                    <Container className="Allstories">
-                        <Card key={index}>
+                <Container key={story.id} className="Allstories">
+                        <Card >
                             <Card.Body>
                                 <Card.Title>{story.title}</Card.Title>
                                 <Card.Text>{story.content}
                                 </Card.Text>
-                                <Button variant="primary" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
+                                <Button variant="outline-light" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
                             </Card.Body>
                         </Card>
                     </Container>
-                </>
             );
         });
     };
@@ -209,9 +207,11 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     <Card.Title>{this.state.story.title}</Card.Title>
                     <Card.Text>{this.state.story.content}
                     </Card.Text>
-                    <Button variant="primary" onClick={(event) => this.setState({ isOpen: true })}>Edit Story</Button>
-                    <Button variant="primary" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
-                    {/* <Link to ="/characters/CharactersLogic">Characters</Link> */}
+                    <Button variant="outline-light"onClick={(event) => this.setState({ isOpen: true })}>Edit Story</Button>
+                    <Button variant="outline-light" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
+                    {/* <Button onClick={(event) => this.setState({ isOpen: false })}>Cancel</Button> */}
+                    {/* <Button variant="secondary" onClick={this.displayCharacter}>Characters</Button> */}
+                    {/* <Link to ="/Characters/CharactersLogic">Characters</Link> */}
                 </Card.Body>
             </Card>
         );
@@ -230,7 +230,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
     render(): React.ReactNode {
         return (
-            <div>
+            <div className="storiesInput">
                 {/* Create a story. */}
                 <form>
                     <label>Title:</label>
@@ -243,9 +243,10 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     <input type="text"
                         value={this.state.content.value}
                         onChange={this.handleContent}></input>
-                    <button onClick={(event) => { this.createStory(event) }}>Create a New Story</button>
+                    <Button variant="outline-light" onClick={(event) => { this.createStory(event) }}>Create a New Story</Button>
+                    <Button variant="outline-light" onClick={(event) => { this.viewallStories(event) }}>View All Stories</Button>
                 </form>
-                <button onClick={(event) => { this.viewallStories(event) }}>View All Stories</button>
+                
 
                 {/* View All Stories*/}
                 <div className='cardGroup'>{this.state.viewallFire && this.storyMapper()}</div>
@@ -255,7 +256,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
 
                 {/* Edit Story */}
                 <>
-                    <Modal show={this.state.isOpen} >
+                    <Modal show={this.state.isOpen} className="editModal" >
                         <Modal.Header>Edit Your Story</Modal.Header>
                         <Modal.Body>
                             <Form>
@@ -263,7 +264,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                                 <input type="text" placeholder="Enter your Story Title"
                                     value={this.state.title.value}
                                     onChange={this.handleTitle}></input>
-
+                                <br/>
                                 <Form.Label>Content:</Form.Label>
                                 <input type="text"
                                     value={this.state.content.value}
@@ -271,8 +272,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="primary" onClick={(event) => this.setState({ isOpen: false })}>Cancel Edit</Button>
-                            <Button variant="primary" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
+                            <Button variant="outline-dark" onClick={(event) => this.setState({ isOpen: false })}>Cancel Edit</Button>
+                            <Button variant="outline-dark" onClick={(event) => this.editStory(event, this.state.story.id)}>Save Story</Button>
                         </Modal.Footer>
                     </Modal>
                 </>

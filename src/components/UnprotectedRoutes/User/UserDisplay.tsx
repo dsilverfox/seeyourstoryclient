@@ -40,7 +40,7 @@ class UsersDisplay extends React.Component<UserDisplayProps, DisplayVars> {
         console.log("UserID at User Display", this.props.userId)
         return (
             <div>
-                <Card style={{ width: '10rem', margin: '10px' }}>
+                <Card className="viewOne">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <Card.Title>Welcome {localStorage.getItem('localName')}</Card.Title>
