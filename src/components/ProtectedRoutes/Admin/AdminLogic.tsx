@@ -1,5 +1,6 @@
 import React from 'react';
 import APIURL from '../../../helpers/environment'
+import { Button } from 'react-bootstrap'
 interface AdminProps {
     sessionToken: string | null
     hasAdmin: boolean
@@ -70,7 +71,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
             return (
                 <ol>
                     <li className="Userlist" key={index}>{index+1}: {user.username} -- {user.id}</li>
-                    <button
+                    <Button variant="danger"
                         className="delete"
                         id='danger'
                         onMouseOver={(event) => {this.setState({id: user.id})}}
@@ -82,7 +83,7 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
                             if (confirmBox === true) {this.deleteUsers(event) }
                         }
                         }
-                    > Delete </button>
+                    > Delete </Button>
                 </ol>
             )
         })
@@ -96,9 +97,9 @@ class AdminLogic extends React.Component <AdminProps, AdminVars> {
         // console.log(this.state.users)
         return(
             <div className="Admin">
-                <h1>Greeting Admin!</h1>
-                <p>You can perform three functions from this page. You can delete your account. You can view all users on the site and using their ID you can delete any user.</p>
-                <button onClick={(event) => {this.viewUsers(event)}}>View Users</button>
+                <h1>Greetings Admin!</h1>
+
+                <Button variant="outline-light" onClick={(event) => {this.viewUsers(event)}}>View Users</Button>
 
                 {/* <label>User ID:</label>
                 <input type="text"

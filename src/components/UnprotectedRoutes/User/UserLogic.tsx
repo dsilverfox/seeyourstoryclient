@@ -1,6 +1,6 @@
 import React from "react";
 import APIURL from "../../../helpers/environment";
-import {Alert} from 'react-bootstrap';
+import {Alert, Button} from 'react-bootstrap';
 
 interface userProps {
     updateToken: (newToken: string) => void 
@@ -168,8 +168,8 @@ class UserLogic extends React.Component<userProps, UserVars> {
                     onChange={this.handlePassword}
                     />
 
-                    <button onClick={(event) => { this.loginUsers(event) }}>Login</button>
-                    <button onClick={(event) => { this.analyze(event) }}>Register</button>
+                    <Button variant="outline-light" onClick={(event) => { this.loginUsers(event) }}>Login</Button>
+                    <Button variant="outline-light" onClick={(event) => { this.analyze(event) }}>Register</Button>
                 </form>
             </div>
         )
