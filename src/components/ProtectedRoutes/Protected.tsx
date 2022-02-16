@@ -2,8 +2,8 @@ import React from 'react';
 import StoriesLogic from './Stories/StoriesLogic'
 import AdminLogic from './Admin/AdminLogic'
 import UserDisplay from '../UnprotectedRoutes/User/UserDisplay'
-import CharactersLogic from './Characters/CharactersLogic';
-import {Route} from 'react-router-dom';
+// import CharactersLogic from './Characters/CharactersLogic';
+// import {Route} from 'react-router-dom';
 
 interface protectedProps {
     clearToken: React.MouseEventHandler<HTMLButtonElement>,
@@ -30,7 +30,7 @@ class Protected extends React.Component<protectedProps, {}> {
                 <UserDisplay clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />
                 <StoriesLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} setStoryId={this.props.setStoryId} />
                 </>
-                <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} />}/>
+                {/* <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} />}/> */}
 
             </div>
         )

@@ -84,6 +84,7 @@
 }
 
 .storiesInput form{
+  margin: 1rem;
   width: 100vw;
 }
 .storiesInput input{ 
@@ -99,7 +100,9 @@
 
 .characterInput input{ 
   margin: 1rem;
+  width: 15rem;
 }
+
 .characterInput button {
   margin: 1rem;
 }

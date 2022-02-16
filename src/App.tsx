@@ -6,11 +6,11 @@ import './App.css';
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from 'react-router-dom';
+// import {
+//   BrowserRouter,
+//   Routes,
+//   Route
+// } from 'react-router-dom';
 
 export interface tokenState {
   sessionToken: string | null

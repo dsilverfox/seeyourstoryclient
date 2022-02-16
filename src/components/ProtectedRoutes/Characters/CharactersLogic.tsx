@@ -261,6 +261,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
     render(): React.ReactNode {
         return (
             <div className="characterInput">
+                <h2>Populate Your World</h2>
                 <form>
                     <label>First Name:</label>
                     <input type="text"
@@ -275,13 +276,13 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                     <br/>
 
                     <label>Gender:</label>
-                    <input type="text"
+                    <input className='gender' type="text"
                         value={this.state.gender}
                         onChange={this.handleGender}></input>
                     <br/>
 
                     <label>Age:</label>
-                    <input type="text"
+                    <input className='age' type="text"
                         value={this.state.age}
                         onChange={this.handleAge}></input>
                     <br/>

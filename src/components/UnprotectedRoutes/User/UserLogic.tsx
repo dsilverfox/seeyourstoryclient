@@ -48,18 +48,9 @@ class UserLogic extends React.Component<userProps, UserVars> {
             this.registerUsers(event);
         } else {
             this.setState({validPass: false})
+            this.setState({alertshow: true})
             return (
-                <Alert variant="danger" show={this.state.alertshow} onClose={() => this.setState({alertshow: false}) } dismissible>
-                    <Alert.Heading>Your password does not meet requirements!</Alert.Heading>
-                    <p>
-                        Your password MUST:
-                        Must be 8 characters or longer.
-                        Must contain at least 1 lowercase
-                        Must contain at least 1 uppercase
-                        Must contain at least 1 number
-                        Must contain at least 1 special character
-                    </p>
-                </Alert>
+                alert("Your Password does not meet requirements. Your password MUST be at least 8 characters or longer. Include at least 1 UPPERCASE letter, at least 1 lowercase letter, at least 1 number, and at least 1 special character")
             );
         }
     }
@@ -160,7 +151,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
 
 
                     <label>Password:</label>
-                    <input type="password"
+                    <input type="text"
                     value={this.state.password.value}
                     onChange={this.handlePassword}
                     />
