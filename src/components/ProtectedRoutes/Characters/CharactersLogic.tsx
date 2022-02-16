@@ -276,19 +276,19 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                         onChange={this.handleLastname}></input>
                     <br/>
 
-                    <label>Gender:</label>
-                    <input className='gender' type="text"
+                    <label className='gender'>Gender:</label>
+                    <input type="text"
                         value={this.state.gender}
                         onChange={this.handleGender}></input>
                     <br/>
 
-                    <label>Age:</label>
-                    <input className='age' type="text"
+                    <label className='age'>Age:</label>
+                    <input type="text"
                         value={this.state.age}
                         onChange={this.handleAge}></input>
                     <br/>
 
-                    <label>Date of Birth:</label>
+                    <label>Birth Date:</label>
                     <input type="text"
                         value={this.state.dob}
                         onChange={this.handleDOB}></input>

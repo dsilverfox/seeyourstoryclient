@@ -100,6 +100,12 @@
   margin: 1rem;
 }
 
+.gender{
+  margin-right: 1rem;
+}
+.age {
+  margin-right: 2.5rem;
+}
 .characterInput input{ 
   margin: 1rem;
   width: 15rem;
