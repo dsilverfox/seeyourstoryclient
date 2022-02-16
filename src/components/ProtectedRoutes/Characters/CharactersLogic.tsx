@@ -296,7 +296,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                     <Button variant="outline-light" onClick={(event) => { this.createCharacter(event) }}>Create a New Character</Button>
 
                     <Button variant="outline-light" type="button" onClick={this.viewallCharacters}>View All Characters</Button>
-                    <Button variant="outline-light"><Link to ='/'>Stories</Link></Button>
+                    <Link to ='/'><Button variant="outline-light" type="button">Stories</Button></Link>
                 </form>
 
 

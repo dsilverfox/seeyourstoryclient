@@ -209,7 +209,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     </Card.Text>
                     <Button variant="outline-light"onClick={(event) => this.setState({ isOpen: true })}>Edit Story</Button>
                     <Button variant="outline-light" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
-                    <Button variant="outline-light"><Link to ="/characters">Characters</Link></Button>
+                    <Link to ="/characters"><Button variant="outline-light" type="button">Characters</Button></Link>
                 </Card.Body>
             </Card>
         );
