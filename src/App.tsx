@@ -9,6 +9,7 @@ import NavBar from './components/NavBar/NavBar';
 import {
   BrowserRouter,
   Routes,
+  Route
 } from 'react-router-dom';
 
 export interface tokenState {
@@ -80,12 +81,12 @@ class App extends React.Component<{}, tokenState> {
   render() {
     return (
       <div className="App">
-      {/* <BrowserRouter> */}
-        {/* <Routes> */}
+      {/* <BrowserRouter>
+        <Routes> */}
             <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId} />
             {this.protectedViews()}
-        {/* </Routes> */}
-      {/* </BrowserRouter> */}
+        {/* </Routes>
+      </BrowserRouter>, document.getElementById('root') */}
       </div>
     )
   }

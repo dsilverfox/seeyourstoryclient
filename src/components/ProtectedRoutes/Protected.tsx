@@ -25,10 +25,13 @@ class Protected extends React.Component<protectedProps, {}> {
     render() {
         return (
             <div>
+                <>
                 {this.adminUser()}
                 <UserDisplay clearToken={this.props.clearToken} sessionToken={this.props.sessionToken} username={this.props.username} userId={this.props.userId} />
                 <StoriesLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} setStoryId={this.props.setStoryId} />
-                {/* <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} />} /> */}
+                </>
+                <Route path='/characters' element={<CharactersLogic storyId={this.props.storyId} sessionToken={this.props.sessionToken} userId={this.props.userId} />}/>
+
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React from "react";
 import APIURL from "../../../helpers/environment";
 import {Alert, Button} from 'react-bootstrap';
 
+
 interface userProps {
     updateToken: (newToken: string) => void 
     setAdmin: (b: boolean) => void
@@ -40,10 +41,6 @@ class UserLogic extends React.Component<userProps, UserVars> {
     }
     
 // REGEX ANALYZE
-
-    setShow(arg0: boolean): void {
-        throw new Error("Function not implemented.");
-    }
 
     analyze(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         if (strongRegex.test(this.state.password.value) || mediumRegex.test(this.state.password.value)) {

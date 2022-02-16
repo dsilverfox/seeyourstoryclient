@@ -211,7 +211,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     <Button variant="outline-light" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
                     {/* <Button onClick={(event) => this.setState({ isOpen: false })}>Cancel</Button> */}
                     {/* <Button variant="secondary" onClick={this.displayCharacter}>Characters</Button> */}
-                    {/* <Link to ="/Characters/CharactersLogic">Characters</Link> */}
+                    {/* MAY REQUIRE COMPONENTWILLUNMOUNT to clear stories information so characters information can load. */}
+                    <Link to ="/Characters/CharactersLogic">Characters</Link>
                 </Card.Body>
             </Card>
         );
