@@ -2,6 +2,7 @@ import React from 'react';
 import ExampleDisplay from './Example/ExampleDisplay';
 // import AuthDisplay from "./Auth/AuthDisplay"
 import UserLogic from './User/UserLogic';
+import {Route} from 'react-router-dom';
 
 interface loginProps {
   updateToken: (newToken: string) => void
@@ -20,10 +21,8 @@ class Unprotected extends React.Component<loginProps, {}> {
   render() {
     return (
       <div>
-        <>
-        <UserLogic updateToken={this.props.updateToken} setAdmin={this.props.setAdmin} setUsername={this.props.setUsername} setUserId={this.props.setUserId} sessionToken={this.props.sessionToken} />
-        <ExampleDisplay />
-        </>
+          <UserLogic updateToken={this.props.updateToken} setAdmin={this.props.setAdmin} setUsername={this.props.setUsername} setUserId={this.props.setUserId} sessionToken={this.props.sessionToken} />
+          <ExampleDisplay /> 
       </div>
     )
   }

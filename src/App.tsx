@@ -6,11 +6,12 @@ import './App.css';
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import NavBar from './components/NavBar/NavBar';
-// import {
-//   BrowserRouter,
-//   Routes,
-//   Route
-// } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
+
 
 export interface tokenState {
   sessionToken: string | null
@@ -75,18 +76,18 @@ class App extends React.Component<{}, tokenState> {
   //If the user has a valid token show the protected views, if they do not show unprotected.
   protectedViews = () => {
     console.log("Session Token on APP.JS", this.state.sessionToken)
-    return (this.state.sessionToken === localStorage.getItem('token') ? <Protected setStoryId={this.setStoryId} storyId={this.state.storyId} updateToken={this.updateToken} clearToken={this.clearToken} sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId} /> : <Unprotected sessionToken={this.state.sessionToken} updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId} />)
+    return (this.state.sessionToken === localStorage.getItem('token') ? <Route path='/' element={<Protected setStoryId={this.setStoryId} storyId={this.state.storyId} updateToken={this.updateToken} clearToken={this.clearToken} sessionToken={this.state.sessionToken} hasAdmin={this.state.hasAdmin} username={this.state.username} userId={this.state.userId} />} />: <Route path= '/' element = {<Unprotected sessionToken={this.state.sessionToken} updateToken={this.updateToken} setAdmin={this.setAdmin} setUsername={this.setUsername} setUserId={this.setUserId} />}/>)
   }
-
+  
   render() {
     return (
       <div className="App">
-      {/* <BrowserRouter>
-        <Routes> */}
+      <BrowserRouter>
             <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId} />
+          <Routes>
             {this.protectedViews()}
-        {/* </Routes>
-      </BrowserRouter>, document.getElementById('root') */}
+         </Routes>
+      </BrowserRouter>
       </div>
     )
   }

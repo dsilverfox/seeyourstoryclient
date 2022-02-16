@@ -1,6 +1,6 @@
 import React from "react";
 import APIURL from "../../../helpers/environment";
-import {Alert, Button} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 
 interface userProps {
