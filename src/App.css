@@ -2,8 +2,9 @@
   text-align: center;
   background-color: Black;
   color: #7B6D8D;
-  width: 100vw;
-  height: auto;
+  width: 98vw;
+  height: 100%;
+  overflow-y: hidden;
 }
 .AppTitle{
   color: white;
@@ -86,6 +87,7 @@
 .storiesInput form{
   margin: 1rem;
   width: 100vw;
+  margin-bottom: 5.7rem;
 }
 .storiesInput input{ 
   margin: 1rem;
