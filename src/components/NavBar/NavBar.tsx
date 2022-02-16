@@ -1,5 +1,6 @@
 import React from 'react';
 import {Navbar, Container, Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom';
 
 interface navProps {
       clickLogout:  React.MouseEventHandler<HTMLButtonElement>
@@ -28,7 +29,7 @@ class AppBar extends React.Component<navProps, {}> {
                 Welcome, {localStorage.getItem('localName')}
             <br/>
                 UserID: {localStorage.getItem('localUserId')}
-            <Button variant="outline-light" className="logout" onClick={this.props.clickLogout}> Logout </Button>
+            <Link to="/"><Button type="button" variant="outline-light" className="logout" onClick={this.props.clickLogout}> Logout </Button></Link>
         </Navbar>
         </>
     )
