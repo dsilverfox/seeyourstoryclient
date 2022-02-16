@@ -163,8 +163,8 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
             .then((storyData) => {
                 this.setState({ story: storyData });
                 // console.log(storyData)
+                this.props.setStoryId(storyData.id)
             });
-        this.setState({ storyId: this.state.storyId })
         this.storyMapOne()
         this.setState({ viewoneFire: true })
         this.setState({ createFire: true })
@@ -209,7 +209,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                     </Card.Text>
                     <Button variant="outline-light"onClick={(event) => this.setState({ isOpen: true })}>Edit Story</Button>
                     <Button variant="outline-light" onClick={(event) => this.deleteStory(event, this.state.story.id)}>Delete Story</Button>
-                    <Link to ="/Characters/CharactersLogic">Characters</Link>
+                    <Button variant="outline-light"><Link to ="/characters">Characters</Link></Button>
                 </Card.Body>
             </Card>
         );
@@ -276,8 +276,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                         </Modal.Footer>
                     </Modal>
                 </>
-                {/* Create Character (EVENTUALLY TAKING ONE TO CHARACTER PAGE) */}
-                <>{this.state.createFire && this.displayCharacter()}</>
+
             </div>
         )
     }

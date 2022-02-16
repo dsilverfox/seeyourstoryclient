@@ -2,8 +2,7 @@ import React from 'react';
 import StoriesLogic from './Stories/StoriesLogic'
 import AdminLogic from './Admin/AdminLogic'
 import UserDisplay from '../UnprotectedRoutes/User/UserDisplay'
-// import CharactersLogic from './Characters/CharactersLogic';
-// import {Route} from 'react-router-dom';
+
 
 interface protectedProps {
     clearToken: React.MouseEventHandler<HTMLButtonElement>,

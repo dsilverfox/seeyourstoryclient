@@ -13,7 +13,7 @@ class AppBar extends React.Component<navProps, {}> {
         <>
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img
                         alt="Silverfox Standard Logo"
                         src="https://dsilverfox.github.io/Assets/SilverfoxWQuill%20(2).jpg"

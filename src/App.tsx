@@ -5,6 +5,8 @@ import './App.css';
 // import ThemeProvider from 'styled-components'
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
+import CharactersLogic from './components/ProtectedRoutes/Characters/CharactersLogic';
+import StoriesLogic from './components/ProtectedRoutes/Stories/StoriesLogic'
 import NavBar from './components/NavBar/NavBar';
 import {
   BrowserRouter,
@@ -70,6 +72,7 @@ class App extends React.Component<{}, tokenState> {
   }
 
   setStoryId = (i: string) => {
+    localStorage.setItem('selectedStory', i)
     this.setState({storyId: i})
   }
 
@@ -86,6 +89,8 @@ class App extends React.Component<{}, tokenState> {
             <NavBar clickLogout={this.clearToken} username={this.state.username} userId={this.state.userId} />
           <Routes>
             {this.protectedViews()}
+            <Route path='/characters' element={<CharactersLogic storyId={this.state.storyId} sessionToken={this.state.sessionToken} userId={this.state.userId} />} />
+            <Route path='/stories' element={<StoriesLogic storyId={this.state.storyId} sessionToken={this.state.sessionToken} userId={this.state.userId} setStoryId={this.setStoryId} />} />
          </Routes>
       </BrowserRouter>
       </div>

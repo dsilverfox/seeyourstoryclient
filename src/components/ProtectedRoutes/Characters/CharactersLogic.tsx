@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button, Modal, Form, Container } from 'react-bootstrap';
 import APIURL from '../../../helpers/environment'
+import {Link} from 'react-router-dom';
 
 
 
@@ -295,6 +296,7 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                     <Button variant="outline-light" onClick={(event) => { this.createCharacter(event) }}>Create a New Character</Button>
 
                     <Button variant="outline-light" type="button" onClick={this.viewallCharacters}>View All Characters</Button>
+                    <Button variant="outline-light"><Link to ='/'>Stories</Link></Button>
                 </form>
 
 
