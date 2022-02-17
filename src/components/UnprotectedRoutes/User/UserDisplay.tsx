@@ -40,13 +40,10 @@ class UsersDisplay extends React.Component<UserDisplayProps, DisplayVars> {
         console.log("UserID at User Display", this.props.userId)
         return (
             <div>
-                <Card className="viewOne">
+                <Card className="userDisplay">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <Card.Title>Welcome {localStorage.getItem('localName')}</Card.Title>
-                        <Card.Text>
-                            Your user ID is {localStorage.getItem('localUserId')}
-                        </Card.Text>
                         <Button variant="danger" onClick={(event) => {
                             const confirmBox = window.confirm("Do you really want to delete your account?This cannot be undone and will erase ALL content PERMANENTLY and INSTANTLY. WE WILL NOT BE ABLE TO RECOVER THIS INFORMATION")
                             if (confirmBox === true) { this.deleteUserAccount((event), this.state.userId) }

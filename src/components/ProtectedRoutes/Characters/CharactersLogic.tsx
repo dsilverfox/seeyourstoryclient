@@ -223,13 +223,13 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
                     <Card >
                         <Card.Body>
                             <Card.Title>{character.firstname} {character.lastname}</Card.Title>
-                            <Card.Text>
+                            <Card.Subtitle>
                                 Gender: {character.gender}
                                 <br />
                                 Age: {character.age}
                                 <br />
-                                Date of Birth{character.dob}
-                            </Card.Text>
+                                Date of Birth: {character.dob}
+                            </Card.Subtitle>
                             <Button variant="outline-light" onClick={(event) => this.viewoneCharacter(event, character.id)}>Select Character</Button>
                         </Card.Body>
                     </Card>
@@ -244,12 +244,12 @@ class CharacterLogic extends React.Component<characterProps, characterVars> {
             <Card className="viewOne">
                 <Card.Body>
                     <Card.Title>{this.state.character.firstname} {this.state.character.lastname}</Card.Title>
-                    <Card.Text>{this.state.character.gender}
+                    <Card.Subtitle>{this.state.character.gender}
                         <br />
                         {this.state.character.age}
                         <br />
                         {this.state.character.dob}
-                    </Card.Text>
+                    </Card.Subtitle>
                     <Button variant="outline-light" onClick={(event) => this.setState({ isOpen: true })}>Edit Character</Button>
                     <Button variant="outline-light" onClick={this.deleteCharacter}>Delete Character</Button>
                     {/* <Button onClick={(event) => this.setState({ isOpen: false })}>Cancel</Button> */}

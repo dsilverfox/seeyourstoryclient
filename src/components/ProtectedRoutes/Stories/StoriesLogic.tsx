@@ -189,7 +189,7 @@ class StoriesLogic extends React.Component<storyProps, storyVars> {
                         <Card >
                             <Card.Body>
                                 <Card.Title>{story.title}</Card.Title>
-                                <Card.Text>{story.content}
+                                <Card.Text id="story">{story.content}
                                 </Card.Text>
                                 <Button variant="outline-light" onClick={(event) => this.viewoneStory(event, story.id)}>Select Story</Button>
                             </Card.Body>
