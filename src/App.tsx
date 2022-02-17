@@ -1,8 +1,5 @@
 import React from 'react';
 import './App.css';
-// import styled from 'styled-components'
-// import Theme from './Theme'
-// import ThemeProvider from 'styled-components'
 import Protected from './components/ProtectedRoutes/Protected';
 import Unprotected from './components/UnprotectedRoutes/Unprotected';
 import CharactersLogic from './components/ProtectedRoutes/Characters/CharactersLogic';

@@ -35,7 +35,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
             password: { value: '' },
             userId: '',
             validPass: false,
-            alertshow: false
+            alertshow: false,
         }
         this.analyze = this.analyze.bind(this);
     }
@@ -79,9 +79,15 @@ class UserLogic extends React.Component<userProps, UserVars> {
                 this.props.updateToken(data.sessionToken)
                 this.props.setUsername(data.user.username)
                 this.props.setUserId(data.user.id)
+
             })
 
             .catch(error => {
+                if (error.message) {
+                    return(
+                        alert("Usernames must be unique.")
+                    )
+                }
                 console.log(error)
             })
     }
@@ -147,7 +153,6 @@ class UserLogic extends React.Component<userProps, UserVars> {
                     <label>Username:</label>
                     <input type="text" placeholder="Enter a Username"
                     value={this.state.username.value}
-                    pattern="^[A-Za-z][A-Za-z0-9_]{3, 72}$"
                     onChange={this.handleUsername}/>
 
 
