@@ -147,6 +147,7 @@ class UserLogic extends React.Component<userProps, UserVars> {
                     <label>Username:</label>
                     <input type="text" placeholder="Enter a Username"
                     value={this.state.username.value}
+                    pattern="^[A-Za-z][A-Za-z0-9_]{3, 72}$"
                     onChange={this.handleUsername}/>
 
 

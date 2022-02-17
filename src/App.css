@@ -2,7 +2,7 @@
   text-align: center;
   background-color: Black;
   color: #7B6D8D;
-  width: 98vw;
+  width: 97.9vw;
   height: 100%;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -118,4 +118,37 @@
 
 h1, h2, h3 {
   margin: 1rem;
+}
+
+/* Animations */
+
+/* Entrance */
+.App {
+	-webkit-animation: App 1s 0.5s both;
+	        animation: App 1s 0.5s both;
+}
+
+@-webkit-keyframes App {
+  0% {
+    -webkit-transform: rotate(540deg) scale(5);
+            transform: rotate(540deg) scale(5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotate(0) scale(1);
+            transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes App {
+  0% {
+    -webkit-transform: rotate(540deg) scale(5);
+            transform: rotate(540deg) scale(5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotate(0) scale(1);
+            transform: rotate(0) scale(1);
+    opacity: 1;
+  }
 }
