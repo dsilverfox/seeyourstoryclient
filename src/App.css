@@ -7,6 +7,7 @@
   overflow-x: auto;
   overflow-y: auto;
 }
+
 .AppTitle{
   color: white;
 }
@@ -175,7 +176,8 @@ h1, h2, h3 {
 
 /* Animations */
 
-/* Entrance */
+/* Entrance
+
 .App {
 	-webkit-animation: App 1s 0.5s both;
 	        animation: App 1s 0.5s both;
@@ -204,4 +206,4 @@ h1, h2, h3 {
             transform: rotate(0) scale(1);
     opacity: 1;
   }
-}
+}  */
